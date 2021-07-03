@@ -58,10 +58,14 @@
                         title: 'CURSO',
                         width: '20%' ,
                     },
-                    costo:{
-                        title: 'COSTO',
+                    nivel:{
+                        title: 'NIVEL',
                         width: '20%' ,
-                    },
+                    }, 
+                    ciclo:{
+                        title: 'CICLO',
+                        width: '20%' ,
+                    },  
                     silabus:{
                         title: 'SILABUS',
                         width: '20%' ,
@@ -70,15 +74,6 @@
                              
                         }
                     },
-
-                    ciclo:{
-                        title: 'CICLO',
-                        width: '20%' ,
-                    },  
-                    nivel:{
-                        title: 'NIVEL',
-                        width: '20%' ,
-                    },  
                    //if(web==1){act="MOSTRAR"},    
                     web:{
                         title: 'WEB',

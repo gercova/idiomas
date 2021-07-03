@@ -21,7 +21,7 @@
                                 <p><i class="icon fa fa-ban"></i><?php echo $this->session->flashdata("error"); ?></p>
                              </div>
                         <?php endif;?>
-                        <form action="<?php echo base_url();?>movimientos/Aperturas/update" method="POST" >
+                        <form action="<?php echo base_url();?>movimientos/aperturas/update" method="POST" id="myForm">
 
 							<input type="hidden" name="idapertura" value="<?php echo $apertura->id;?>">
 							

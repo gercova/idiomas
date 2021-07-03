@@ -21,7 +21,7 @@
 							</div>
 				            </div>
 						<?php endif; ?>
-						<form action="<?php echo base_url('prematriculas/aperturas/store'); ?>" method="POST">
+						<form action="<?php echo base_url('prematriculas/aperturas/store'); ?>" method="POST" id="myForm">
 
 							<div class="form-group">
 								<div class="col-md-6">
@@ -91,6 +91,8 @@
 						<tr>
 							<th>#</th>
 							<th>NOMBRE</th>
+							<th>NIVEL</th>
+							<th>CICLO</th>
 							<th>OPCIÓN</th>
 						</tr>
 					</thead>
