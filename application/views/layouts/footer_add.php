@@ -11,6 +11,13 @@ function mostrarAlert(icon, title){
     });
 }
 
+function mostrarAgragar(icon, title){
+    Swal.fire({
+        icon: icon,
+        title: title,
+    });
+}
+
 var statusSend = false;
 
 //Requiere añadir "id=myForm" a elemento form
