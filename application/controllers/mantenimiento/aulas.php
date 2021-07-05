@@ -1,28 +1,23 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
-class aulas extends CI_Controller
-{
+class aulas extends CI_Controller {
 	private $permisos; /* crear para permisos de modulos  */
-	public function __construct()
-	{	parent::__construct();
+	public function __construct(){	
+		parent::__construct();
 		$this->permisos = $this->backend_lib->control();/* crear para permisos de modulos  */
+		$this->load->model('view_model');
 		$this->load->model("aulas_model");	
 	}
 
-	public function index()
-	{	$data  = array(
+	public function index(){	
+		$data  = array(
 			'permisos' => $this->permisos, /* crear para permisos de modulos  */
 		);
-		$this->load->view("layouts/header");
-		$this->load->view("layouts/aside");
-		$this->load->view("admin/aulas/listjt", $data);
-		$this->load->view("layouts/footer");
-		$this->load->view("content/c_aulas");	
+		$this->load->view('admin/aulas/listjt', $data, 'content/c_aulas');
 	}
 
-	public function lista()
-	{	$starIndex = $_GET['jtStartIndex'];
+	public function lista(){	
+		$starIndex = $_GET['jtStartIndex'];
 		$pageSize = $_GET['jtPageSize'];
 		$buscar = (isset($_POST['search']) ? $_POST['search']: '' );
 		$libro = $this->aulas_model->grilla($starIndex, $pageSize, $buscar);
@@ -33,8 +28,7 @@ class aulas extends CI_Controller
 		echo json_encode($jTableResult);
 	}
 
-	public function edit()
-	{
+	public function edit(){
 		$id = $this->input->post("id");
 		$this->aulas_model->getedit($id);
 	}
@@ -49,18 +43,16 @@ class aulas extends CI_Controller
 
 		);
 
-			if ($id<=0) {
-				$this->aulas_model->save($data);
-				echo json_encode(['sucess' => true]);
-			//	redirect(base_url()."administrador/pacientes");
-			}
-			else{
-				$this->aulas_model->update($id,$data);
-				echo json_encode(['sucess' => true]);
-			}
+		if ($id<=0) {
+			$this->aulas_model->save($data);
+			echo json_encode(['sucess' => true]);
+		}else{
+			$this->aulas_model->update($id,$data);
+			echo json_encode(['sucess' => true]);
 		}
-	public function delete($id)
-	{
+	}
+
+	public function delete($id){
 		$data  = array(
 			'estado' => "0",
 		);

@@ -1,5 +1,3 @@
-
-
 <script src="<?php echo base_url();?>assets/template/swalalert2.js"></script>
 
 <script>

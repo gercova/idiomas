@@ -295,10 +295,8 @@ $('.time-picker2').timepicker({
         }
     });
 
- $('.sidebar-menu').tree();
-
-// 
-	/// seleccionar apertura de cursos en la grilla prematricula
+    $('.sidebar-menu').tree();
+    /// seleccionar apertura de cursos en la grilla prematricula
     $(document).on("click",".btn-curaperturados",function(){
         curaperturado = $(this).val();
         infocuraperturado = curaperturado.split("*");
@@ -306,7 +304,15 @@ $('.time-picker2').timepicker({
         $("#informacion").val(infocuraperturado[1]+" - "+infocuraperturado[0]+ " :::: GRUPO : "+infocuraperturado[2]);
         $("#modal-curaperturado").modal("hide");
     });
-
+    //// FORMULARIO APERTURAS
+    /// seleccionar el curso en el formulario APERTURA 
+    $(document).on("click", "#btn-cursoape", function(){
+        curso = $(this).val();
+        infocurso = curso.split("*");
+        $("#idcurso").val(infocurso[0]);
+        $("#curso").val(infocurso[1]);
+        $("#modal-curso").modal("hide");
+    });
 	/// seleccionar curso con deudas de alumnos
     $(document).on("click",".btn-curdeuda",function(){
         curaperturado = $(this).val();
@@ -315,321 +321,295 @@ $('.time-picker2').timepicker({
         $("#informacion").val(infocuraperturado[0]+" - "+infocuraperturado[1]);
         $("#modal-curdeuda").modal("hide");
     });
-
-
-
-
-//// FORMULARIO APERTURAS
-        /// seleccionar el curso en el formulario APERTURA 
-         $(document).on("click",".btn-cursoape",function(){
-                curso = $(this).val();
-                infocurso = curso.split("*");
-                $("#idcurso").val(infocurso[0]);
-                $("#curso").val(infocurso[1]);
-                $("#costo").val(infocurso[2]);
-                $("#modal-curso").modal("hide");
-        });
-        /// seleccionar el grupo en el formulario APERTURA
-        $(document).on("click",".btn-grupoape",function(){
-            grupo = $(this).val();
-            infogrupo = grupo.split("*");
-            $("#idgrupo").val(infogrupo[0]);
-            $("#grupo").val(infogrupo[1]+" "+infogrupo[2]+" "+infogrupo[3]);
-            $("#modal-grupo").modal("hide");
-        });
-
-
-//// FORMULARIO PREMATRICULAS
+    //// FORMULARIO PREMATRICULAS
     /// seleccionar el estudiates en el formulario prematricula 
-        $(document).on("click",".btn-estupre",function(){
-            estudiante = $(this).val();
-            infoestudiante = estudiante.split("*");
-            $("#idestudiante").val(infoestudiante[0]);
-          //  $("#num_documento").val(infoestudiante[1]);
-            $("#estudiante").val(infoestudiante[1]);
-            $("#modal-estudiante").modal("hide");
-        });
+    $(document).on("click",".btn-estupre",function(){
+        estudiante = $(this).val();
+        infoestudiante = estudiante.split("*");
+        $("#idestudiante").val(infoestudiante[0]);
+        $("#estudiante").val(infoestudiante[1]);
+        $("#modal-estudiante").modal("hide");
+    });
     /// BUSCAR ESTUDIANTE
+<<<<<<< HEAD
   
+=======
+    $("#btn-buscarestu").on("click", function(event) {             
+        if($("#dni").val()) {
+            var uno = $("#dni").val();
+            $.ajax({
+                url: base_url + "movimientos/Prematriculas/buscarestud",
+                method: "POST",
+                data:{dni:uno},
+                dataType: "json"
+            }).done(function(result) {
+                // console.log(result);
+                    $("#idestudiante").val(result.id);
+                    $("#estudiante").val(result.nombre);
+            }).fail(function(jqXHR, textStatus, errorThrown) {});
+        }else{
+            alert("Ingrese DNI/RUC del Estudiante");
+        }
+    });
+>>>>>>> 99496fdacf299b55b5afafc198ae45741a2cbbc3
     /// seleccionar el nivel academico en el formulario prematricula 
-        $(document).on("click",".btn-nivelpre",function(){
-            nivel = $(this).val();
-            infonivel = nivel.split("*");
-            $("#idnivel").val(infonivel[0]);
-            $("#nivel").val(infonivel[1]+" "+infonivel[2]);
-            $("#porcentaje").val(infonivel[2]);
-            $("#modal-nivel").modal("hide");
-        });
-
+    $(document).on("click",".btn-nivelpre",function(){
+        nivel = $(this).val();
+        infonivel = nivel.split("*");
+        $("#idnivel").val(infonivel[0]);
+        $("#nivel").val(infonivel[1]+" "+infonivel[2]);
+        $("#porcentaje").val(infonivel[2]);
+        $("#modal-nivel").modal("hide");
+    });
     /// seleccionar apertura de cursos en formulario prematricula
+<<<<<<< HEAD
 
+=======
+    $(document).on("click",".btn-apertura",function(){
+        apertura = $(this).val();
+        infoapertura = apertura.split("*");
+        $("#idapertura").val(infoapertura[0]);
+        $("#apertura").val(infoapertura[1]+" - "+infoapertura[0]+" :::: GRUPO : "+infoapertura[2]+" :::: HORARIO : "+infoapertura[3]+" A "+infoapertura[4]);
+        $("#costo").val(infoapertura[5]);
+        $("#curso").val(infoapertura[6]);
+        $("#modal-apertura").modal("hide");
+    });
+>>>>>>> 99496fdacf299b55b5afafc198ae45741a2cbbc3
     /// calcular el pago del alumno por curso
-        $("#btn-calcular-pago").on("click",function(){
-            
-            data = $("#costo").val()+ "*"+$("#porcentaje").val()+ "*"+$("#descuento").val();
-            if ($("#costo").val() !='' &&  $("#porcentaje").val() !='' && $("#descuento").val() !='') {
-                data = $("#costo").val()+ "*"+$("#porcentaje").val()+"*"+$("#descuento").val();
-                infopre = data.split("*");
-                montopre = (infopre[0]-(infopre[0]*infopre[1]))-infopre[2];
-                $("#monto").val(parseInt(montopre));
-            }else{
-                alert("Ingrese datos para poder calcular...");
-            }
-        });
-
+    $("#btn-calcular-pago").on("click",function(){
+        data = $("#costo").val()+ "*"+$("#porcentaje").val()+ "*"+$("#descuento").val();
+        if ($("#costo").val() !='' &&  $("#porcentaje").val() !='' && $("#descuento").val() !='') {
+            data = $("#costo").val()+ "*"+$("#porcentaje").val()+"*"+$("#descuento").val();
+            infopre = data.split("*");
+            montopre = (infopre[0]-(infopre[0]*infopre[1]))-infopre[2];
+            $("#monto").val(parseInt(montopre));
+        }else{
+            alert("Ingrese datos para poder calcular...");
+        }
+    });
     /// remover prematricuallas
-        $(document).on("click",".btn-remove-prema", function(){
-            conpre= conpre -1;
-            $("#conpre").val(conpre);
-            $(this).closest("tr").remove();
-
-            //$("#conpre").val(conpre);
-        // sumar();
-        });
-        
-//FORMULRIO PAGOS 
-            /// DATOS DEL ALUMNO FORMULARIO PAGOS
-            $(document).on("click",".btn-pagos",function(){
-                    grupo = $(this).val();
-                    infogrupo = grupo.split("*");
-                    $("#idprematricula").val(infogrupo[0]);
-                    $("#dniestudiante").val(infogrupo[1]);
-                    $("#estudiante").val(infogrupo[2]);
-                    $("#curso").val(infogrupo[3]+" - "+infogrupo[4]);
-                    $("#deuda").val(infogrupo[5]);
-                    $("#descripcion").val("CTITPT");
-                    $("#modal-prematricula").modal("hide");
-                });
-            //AGREGA PAGOS A LA TABLA DEL FORMULARIO DE PAGOS
-                $("#btn-agregar-pago").on("click",function(){
-                    var con=0;
-                        if ($("#descripcion").val() !='' &&  $("#monto").val() !='' &&  $("#codigo").val() !='' &&  $("#fecha_pago").val() !='') {
-                        data =$("#idprematricula").val()+"*"+$("#dniestudiante").val()+"*"+$("#estudiante").val()+"*"+$("#descripcion").val()+ "*"+$("#monto").val()+ "*"+$("#codigo").val()+ "*"+$("#fecha_pago").val()+ "*"+$("#deuda").val();
-                        infopago = data.split("*");
-                        con=con+1;
-                        html = "<tr>";
-                        html += "<td><input type='hidden' class='form-control' name='idpre[]' value='"+infopago[0]+"'><input type='text' size='5%' readonly style='text-align:right' class='form-control' name='dni[]' value='"+infopago[1]+"'></td>";    
-                        html += "<td><input type='hidden' class='form-control' name='deudas[]' value='"+infopago[7]+"'><input type='text' size='30%' readonly class='form-control' name='estudiante[]' value='"+infopago[2]+"'></td>";
-                        html += "<td><input type='text' size='5%' style='text-align:right' class='form-control' name='descripcionpago[]' value='"+infopago[3]+"'></td>";
-                        html += "<td><input type='text' size='5%' style='text-align:right' class='form-control' name='montopago[]' value='"+infopago[4]+"'></td>";
-                        html += "<td><input type='text' size='5%' style='text-align:right' class='form-control' name='codigopago[]' value='"+infopago[5]+"'></td>";
-                        html += "<td><input type='date' size='10%' style='color:red;text-align:right' class='form-control' name='fechapago[]' value='"+infopago[6]+"'></td>";
-                        html += "<td><button type='button' class='btn btn-danger btn-remove-pago'><span class='fa fa-remove'></span></button></td>";
-                        html += "</tr>";
-                        $("#tbpagos tbody").append(html);
-                    //   sumar();
-                    $("#contador").val(con);
-                        $("#idprematricula").val(null);
-                        $("#dniestudiante").val(null);
-                        $("#estudiante").val(null);
-                        $("#curso").val(null);
-                        $("#deuda").val(null);
-                        $("#descripcion").val(null);
-                        $("#monto").val(null);
-                        $("#codigo").val(null);
-                        $("#fecha_pago").val(null);
-                    }else{
-                        alert("Ingrese datos del Boucher...");
-                    }
-                });
-                /// remober pago 
-                $(document).on("click",".btn-remove-pago", function(){
-                    $(this).closest("tr").remove();
-                    sumar();
-                });
- //FORMULRIO PAGOS VARIOS
-            /// DATOS DEL ALUMNO FORMULARIO PAGOS
-            $(document).on("click",".btn-pagoestudiante",function(){
-                    grupo = $(this).val();
-                    infogrupo = grupo.split("*");
-                    $("#idestudiante").val(infogrupo[0]);
-                    $("#dniestudiante").val(infogrupo[1]);
-                    $("#estudiante").val(infogrupo[2]);
-                    $("#descripcion").val("CTITPT");
-                    $("#modal-estudiante").modal("hide");
-                });
-            /// DATOS DEL CONCEPTO
-            $(document).on("click",".btn-concepto",function(){
-                    grupo = $(this).val();
-                    infogrupo = grupo.split("*");
-                    $("#idconcepto").val(infogrupo[0]);
-                    $("#concepto").val(infogrupo[1]);
-                    $("#modal-concepto").modal("hide");
-                });
-
-            //AGREGA PAGOS A LA TABLA DEL FORMULARIO DE PAGOS
-                $("#btn-agregar-otropago").on("click",function(){
-                    var con=0;
-                        if ($("#concepto").val() !='' && $("#descripcion").val() !='' &&  $("#monto").val() !='' &&  $("#codigo").val() !='' &&  $("#fecha_pago").val() !='') {
-                        data =$("#idestudiante").val()+"*"+$("#dniestudiante").val()+"*"+$("#estudiante").val()+"*"+$("#idconcepto").val()+"*"+$("#concepto").val()+"*"+$("#descripcion").val()+ "*"+$("#monto").val()+ "*"+$("#codigo").val()+ "*"+$("#fecha_pago").val();
-                        infopago = data.split("*");
-                        con=con+1;
-                        html = "<tr>";
-                        html += "<td><input type='hidden' class='form-control' name='idestudiante[]' value='"+infopago[0]+"'><input type='text' size='5%' readonly style='text-align:right' class='form-control' name='dni[]' value='"+infopago[1]+"'></td>";    
-                        html += "<td><input type='text' size='30%' readonly class='form-control' name='estudiante[]' value='"+infopago[2]+"'></td>";
-                        html += "<td><input type='hidden' class='form-control' name='idconcepto[]' value='"+infopago[3]+"'><input type='text' size='5%' readonly style='text-align:right' class='form-control' name='concepto[]' value='"+infopago[4]+"'></td>";
-                        html += "<td><input type='text' size='5%' style='text-align:right' class='form-control' name='descripcionpago[]' value='"+infopago[5]+"'></td>";
-                        html += "<td><input type='text' size='5%' style='text-align:right' class='form-control' name='montopago[]' value='"+infopago[6]+"'></td>";
-                        html += "<td><input type='text' size='5%' style='text-align:right' class='form-control' name='codigopago[]' value='"+infopago[7]+"'></td>";
-                        html += "<td><input type='date' size='10%' style='color:red;text-align:right' class='form-control' name='fechapago[]' value='"+infopago[8]+"'></td>";
-                        html += "<td><button type='button' class='btn btn-danger btn-remove-otropago'><span class='fa fa-remove'></span></button></td>";
-                        html += "</tr>";
-                        $("#tbpagos tbody").append(html);
-                    //   sumar();
-                    $("#contador").val(con);
-                        $("#idestudiante").val(null);
-                        $("#dniestudiante").val(null);
-                        $("#estudiante").val(null);
-                        $("#idconcepto").val(null);
-                        $("#concepto").val(null);
-                        $("#descripcion").val(null);
-                        $("#monto").val(null);
-                        $("#codigo").val(null);
-                        $("#fecha_pago").val(null);
-                    }else{
-                        alert("Ingrese datos todos los datos...");
-                    }
-                });
-                /// remober pago 
-                $(document).on("click",".btn-remove-otropago", function(){
-                    $(this).closest("tr").remove();
-                    sumar();
-                });
-
-//// INICIAR CURSO - MATRICULAR ALUMNOS
-        /// seleccionar apertura de cursos en formulario iniciar curso
-                $(document).on("click",".btn-inicurso",function(){
-                apertura = $(this).val();
-                infoapertura = apertura.split("*");
-                $("#idapertura").val(infoapertura[0]);
-                $("#apertura").val(infoapertura[1]+" - "+infoapertura[0]+" :::: GRUPO : "+infoapertura[2]+" :::: HORARIO : "+infoapertura[3]+" A "+infoapertura[4]);
-                $("#modal-inicurso").modal("hide");
-            });
-        ///// seleccionar  datos del docente
-        $(document).on("click",".btn-docente",function(){
-                docente = $(this).val();
-                infodocente = docente.split("*");
-                $("#iddocente").val(infodocente[0]);
-                $("#docente").val(infodocente[1]);
-                $("#modal-docente").modal("hide");
-            });
-        ///// seleccionar aula 
-        $(document).on("click",".btn-aula",function(){
-                aula = $(this).val();
-                infoaula = aula.split("*");
-                $("#idaula").val(infoaula[0]);
-                $("#aula").val(infoaula[1]);
-                $("#modal-aula").modal("hide");
-            });
-        //// consultar el docente del curso aperturado 
-             $("#btn-consultar").on("click", function(event) {             
-                if($("#idapertura").val()) {
-                var uno = $("#idapertura").val();
-                //alert(uno);
-                    $.ajax({
-                            url: base_url + "matriculas/Matriculas/buscar",
-                            method: "POST",
-                            data:{idapertura:uno},
-                            dataType: "json"
-                    })
-                        .done(function(result) {
-                        // console.log(result);
-                            $("#iddocente").val(result.docente_id);
-                            $("#docente").val(result.docente);
-                            $("#idaula").val(result.aula_id);
-                            $("#aula").val(result.aula);
-                            $("#fecha_ini").val(result.fecha_ini);
-                            $("#fecha_fin").val(result.fecha_fin);
-                    
-                        })
-                        .fail(function(jqXHR, textStatus, errorThrown) {
-                        });
-                }else{
-                        alert("Ingrese datos del curso");
-                    }
-            });
-
-        //// consultar el docente del curso aperturado en el menu modificado
-            $("#btn-consultarmod").on("click", function(event) {
-                if($("#idapertura").val()) {
-                var uno = $("#idapertura").val();
-                //alert(uno);
-                    $.ajax({
-                            url: base_url + "matriculas/Matriculas/buscarmod",
-                            method: "POST",
-                            data:{idapertura:uno},
-                            dataType: "json"
-                    })
-                        .done(function(result) {
-                        // console.log(result);
-                            $("#iddocente").val(result.docente_id);
-                            $("#docente").val(result.docente);
-                            $("#idaula").val(result.aula_id);
-                            $("#aula").val(result.aula);
-                            $("#fecha_ini").val(result.fecha_ini);
-                            $("#fecha_fin").val(result.fecha_fin);
-                        })
-                        .fail(function(jqXHR, textStatus, errorThrown) {
-                        });
-
-                }else{
-                        alert("Ingrese datos del curso");
-                    }
-            });
-
-            // matricular alumnos 
-
-            $("#btn-agregar-alumno").on("click", function(event) {
-                    
-                    if($("#idapertura").val()) {
-                    var uno = $("#idapertura").val();
-                        $.ajax({
-                                url: base_url + "matriculas/Matriculas/buscaralumno",
-                                method: "POST",
-                                data:{idapertura:uno},
-                                dataType: "json"
-                        })
-                            .done(function(result) {
-                            console.log(result);
-                            table.clear().draw();
-                            table.rows.add(result).draw();
-                            })
-                            .fail(function(jqXHR, textStatus, errorThrown) {
-                            // needs to implement if it fails
-                            });
-
-                    }else{
-                            alert("Ingrese todos los datos del formulario");
-                        }
-                });
-            /// tabla de alumnos agregados
-            let table = $("#table_id").DataTable({
-                columns: [
-                    { data: "dni" },
-                    { data: "nombre" },
-                    // { data: "apellido" },
-                    { data: "id",
-                        render: function (data_id) { 
-                            return `<input type='hidden' name='idprematricula[]' value='${data_id}'  ><button  type='button'  class='prematriculas btn btn-danger btn-remove-alupre'><span class='fa fa-remove'></span></button>`;
-                    }}
-                ],
-                rowCallback: function(row, data) {},
-                filter: true,
-                info: true,
-                ordering: true,
-                processing: true,
-                retrieve: true,
-                paging:   false,
-            });
-
-     /// remover modulos
-            $(document).on("click",".btn-remove-alupre", function(){
-                $(this).closest("tr").remove();
-            // sumar();
-            });
-
-//// FORMULARIO NOTAS
-
+    $(document).on("click",".btn-remove-prema", function(){
+        conpre= conpre -1;
+        $("#conpre").val(conpre);
+        $(this).closest("tr").remove();
+    });
+    //FORMULRIO PAGOS 
+    /// DATOS DEL ALUMNO FORMULARIO PAGOS
+    $(document).on("click",".btn-pagos",function(){
+        grupo = $(this).val();
+        infogrupo = grupo.split("*");
+        $("#idprematricula").val(infogrupo[0]);
+        $("#dniestudiante").val(infogrupo[1]);
+        $("#estudiante").val(infogrupo[2]);
+        $("#curso").val(infogrupo[3]+" - "+infogrupo[4]);
+        $("#deuda").val(infogrupo[5]);
+        $("#descripcion").val("CTITPT");
+        $("#modal-prematricula").modal("hide");
+    });
+//AGREGA PAGOS A LA TABLA DEL FORMULARIO DE PAGOS
+    $("#btn-agregar-pago").on("click",function(){
+        var con=0;
+        if ($("#descripcion").val() !='' &&  $("#monto").val() !='' &&  $("#codigo").val() !='' &&  $("#fecha_pago").val() !='') {
+            data =$("#idprematricula").val()+"*"+$("#dniestudiante").val()+"*"+$("#estudiante").val()+"*"+$("#descripcion").val()+ "*"+$("#monto").val()+ "*"+$("#codigo").val()+ "*"+$("#fecha_pago").val()+ "*"+$("#deuda").val();
+            infopago = data.split("*");
+            con=con+1;
+            html = "<tr>";
+            html += "<td><input type='hidden' class='form-control' name='idpre[]' value='"+infopago[0]+"'><input type='text' size='5%' readonly style='text-align:right' class='form-control' name='dni[]' value='"+infopago[1]+"'></td>";    
+            html += "<td><input type='hidden' class='form-control' name='deudas[]' value='"+infopago[7]+"'><input type='text' size='30%' readonly class='form-control' name='estudiante[]' value='"+infopago[2]+"'></td>";
+            html += "<td><input type='text' size='5%' style='text-align:right' class='form-control' name='descripcionpago[]' value='"+infopago[3]+"'></td>";
+            html += "<td><input type='text' size='5%' style='text-align:right' class='form-control' name='montopago[]' value='"+infopago[4]+"'></td>";
+            html += "<td><input type='text' size='5%' style='text-align:right' class='form-control' name='codigopago[]' value='"+infopago[5]+"'></td>";
+            html += "<td><input type='date' size='10%' style='color:red;text-align:right' class='form-control' name='fechapago[]' value='"+infopago[6]+"'></td>";
+            html += "<td><button type='button' class='btn btn-danger btn-remove-pago'><span class='fa fa-remove'></span></button></td>";
+            html += "</tr>";
+            $("#tbpagos tbody").append(html);
+            $("#contador").val(con);
+            $("#idprematricula").val(null);
+            $("#dniestudiante").val(null);
+            $("#estudiante").val(null);
+            $("#curso").val(null);
+            $("#deuda").val(null);
+            $("#descripcion").val(null);
+            $("#monto").val(null);
+            $("#codigo").val(null);
+            $("#fecha_pago").val(null);
+        }else{
+            alert("Ingrese datos del Boucher...");
+        }
+    });
+    /// remober pago 
+    $(document).on("click",".btn-remove-pago", function(){
+        $(this).closest("tr").remove();
+        sumar();
+    });
+    //FORMULRIO PAGOS VARIOS
+    /// DATOS DEL ALUMNO FORMULARIO PAGOS
+    $(document).on("click",".btn-pagoestudiante",function(){
+        grupo = $(this).val();
+        infogrupo = grupo.split("*");
+        $("#idestudiante").val(infogrupo[0]);
+        $("#dniestudiante").val(infogrupo[1]);
+        $("#estudiante").val(infogrupo[2]);
+        $("#descripcion").val("CTITPT");
+        $("#modal-estudiante").modal("hide");
+    });
+    /// DATOS DEL CONCEPTO
+    $(document).on("click",".btn-concepto",function(){
+        grupo = $(this).val();
+        infogrupo = grupo.split("*");
+        $("#idconcepto").val(infogrupo[0]);
+        $("#concepto").val(infogrupo[1]);
+        $("#modal-concepto").modal("hide");
+    });
+    //AGREGA PAGOS A LA TABLA DEL FORMULARIO DE PAGOS
+    $("#btn-agregar-otropago").on("click",function(){
+        var con=0;
+        if ($("#concepto").val() !='' && $("#descripcion").val() !='' &&  $("#monto").val() !='' &&  $("#codigo").val() !='' &&  $("#fecha_pago").val() !='') {
+            data =$("#idestudiante").val()+"*"+$("#dniestudiante").val()+"*"+$("#estudiante").val()+"*"+$("#idconcepto").val()+"*"+$("#concepto").val()+"*"+$("#descripcion").val()+ "*"+$("#monto").val()+ "*"+$("#codigo").val()+ "*"+$("#fecha_pago").val();
+            infopago = data.split("*");
+            con=con+1;
+            html = "<tr>";
+            html += "<td><input type='hidden' class='form-control' name='idestudiante[]' value='"+infopago[0]+"'><input type='text' size='5%' readonly style='text-align:right' class='form-control' name='dni[]' value='"+infopago[1]+"'></td>";    
+            html += "<td><input type='text' size='30%' readonly class='form-control' name='estudiante[]' value='"+infopago[2]+"'></td>";
+            html += "<td><input type='hidden' class='form-control' name='idconcepto[]' value='"+infopago[3]+"'><input type='text' size='5%' readonly style='text-align:right' class='form-control' name='concepto[]' value='"+infopago[4]+"'></td>";
+            html += "<td><input type='text' size='5%' style='text-align:right' class='form-control' name='descripcionpago[]' value='"+infopago[5]+"'></td>";
+            html += "<td><input type='text' size='5%' style='text-align:right' class='form-control' name='montopago[]' value='"+infopago[6]+"'></td>";
+            html += "<td><input type='text' size='5%' style='text-align:right' class='form-control' name='codigopago[]' value='"+infopago[7]+"'></td>";
+            html += "<td><input type='date' size='10%' style='color:red;text-align:right' class='form-control' name='fechapago[]' value='"+infopago[8]+"'></td>";
+            html += "<td><button type='button' class='btn btn-danger btn-remove-otropago'><span class='fa fa-remove'></span></button></td>";
+            html += "</tr>";
+            $("#tbpagos tbody").append(html);
+            $("#contador").val(con);
+            $("#idestudiante").val(null);
+            $("#dniestudiante").val(null);
+            $("#estudiante").val(null);
+            $("#idconcepto").val(null);
+            $("#concepto").val(null);
+            $("#descripcion").val(null);
+            $("#monto").val(null);
+            $("#codigo").val(null);
+            $("#fecha_pago").val(null);
+        }else{
+            alert("Ingrese datos todos los datos...");
+        }
+    });
+    /// remober pago 
+    $(document).on("click",".btn-remove-otropago", function(){
+        $(this).closest("tr").remove();
+        sumar();
+    });
+    //// INICIAR CURSO - MATRICULAR ALUMNOS
+    /// seleccionar apertura de cursos en formulario iniciar curso
+        $(document).on("click",".btn-inicurso",function(){
+        apertura = $(this).val();
+        infoapertura = apertura.split("*");
+        $("#idapertura").val(infoapertura[0]);
+        $("#apertura").val(infoapertura[1]+" - "+infoapertura[0]+" :::: GRUPO : "+infoapertura[2]+" :::: HORARIO : "+infoapertura[3]+" A "+infoapertura[4]);
+        $("#modal-inicurso").modal("hide");
+    });
+    ///// seleccionar  datos del docente
+    $(document).on("click",".btn-docente",function(){
+        docente = $(this).val();
+        infodocente = docente.split("*");
+        $("#iddocente").val(infodocente[0]);
+        $("#docente").val(infodocente[1]);
+        $("#modal-docente").modal("hide");
+    });
+    ///// seleccionar aula 
+    $(document).on("click",".btn-aula",function(){
+        aula = $(this).val();
+        infoaula = aula.split("*");
+        $("#idaula").val(infoaula[0]);
+        $("#aula").val(infoaula[1]);
+        $("#modal-aula").modal("hide");
+    });
+    //// consultar el docente del curso aperturado 
+    $("#btn-consultar").on("click", function(event) {             
+        if($("#idapertura").val()) {
+            var uno = $("#idapertura").val();
+            //alert(uno);
+            $.ajax({
+                url: base_url + "matriculas/Matriculas/buscar",
+                method: "POST",
+                data:{ idapertura:uno },
+                dataType: "json"
+            }).done(function(result){
+                $("#iddocente").val(result.docente_id);
+                $("#docente").val(result.docente);
+                $("#idaula").val(result.aula_id);
+                $("#aula").val(result.aula);
+                $("#fecha_ini").val(result.fecha_ini);
+                $("#fecha_fin").val(result.fecha_fin);
+            }).fail(function(jqXHR, textStatus, errorThrown) {});
+        }else{
+            alert("Ingrese datos del curso");
+        }
+    });
+    //// consultar el docente del curso aperturado en el menu modificado
+    $("#btn-consultarmod").on("click", function(event) {
+        if($("#idapertura").val()) {
+            var uno = $("#idapertura").val();
+            //alert(uno);
+            $.ajax({
+                url: base_url + "matriculas/Matriculas/buscarmod",
+                method: "POST",
+                data:{idapertura:uno},
+                dataType: "json"
+            }).done(function(result) {
+                // console.log(result);
+                $("#iddocente").val(result.docente_id);
+                $("#docente").val(result.docente);
+                $("#idaula").val(result.aula_id);
+                $("#aula").val(result.aula);
+                $("#fecha_ini").val(result.fecha_ini);
+                $("#fecha_fin").val(result.fecha_fin);
+            }).fail(function(jqXHR, textStatus, errorThrown) {});
+        }else{
+            alert("Ingrese datos del curso");
+        }
+    });
+    // matricular alumnos 
+    $("#btn-agregar-alumno").on("click", function(event) {            
+        if($("#idapertura").val()) {
+            var uno = $("#idapertura").val();
+            $.ajax({
+                url: base_url + "matriculas/Matriculas/buscaralumno",
+                method: "POST",
+                data:{idapertura:uno},
+                dataType: "json"
+            }).done(function(result) {
+                console.log(result);
+                table.clear().draw();
+                table.rows.add(result).draw();
+            }).fail(function(jqXHR, textStatus, errorThrown) {});
+        }else{
+            alert("Ingrese todos los datos del formulario");
+        }
+    });
+    /// tabla de alumnos agregados
+    let table = $("#table_id").DataTable({
+        columns: [
+            { data: "dni" },
+            { data: "nombre" },
+            // { data: "apellido" },
+            { data: "id",
+                render: function (data_id) { 
+                    return `<input type='hidden' name='idprematricula[]' value='${data_id}'  ><button  type='button'  class='prematriculas btn btn-danger btn-remove-alupre'><span class='fa fa-remove'></span></button>`;
+            }}
+        ],
+        rowCallback: function(row, data) {},
+        filter: true,
+        info: true,
+        ordering: true,
+        processing: true,
+        retrieve: true,
+        paging:   false,
+    });
+    /// remover modulos
+    $(document).on("click",".btn-remove-alupre", function(){
+        $(this).closest("tr").remove();
+    });
+    //// FORMULARIO NOTAS
     $(document).on("click",".btn-matri-notas",function(){
         notas = $(this).val();
         infomatrinotas = notas.split("*");
@@ -648,7 +628,6 @@ $('.time-picker2').timepicker({
 		$("#idcurso").val(infomatrinotas[12]);
         $("#modal-matri-notas").modal("hide");
     });
-
     /// cargar notas  add notas
     $("#btn-agregar-notas").on("click", function(event) {
          if($("#idapertura").val() !='' && $("#idcurso").val() !='') {

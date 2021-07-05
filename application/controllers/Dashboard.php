@@ -1,27 +1,16 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+class Dashboard extends CI_Controller {
 
-class Dashboard extends CI_Controller
-{
-
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 		$this->permisos = $this->backend_lib->control();/* crear para permisos de modulos  */
-	//	$this->load->model("Pagos_model");
-	//	$this->load->model("Backend_model");
+	
 	}
-	public function index()
-	{	// para contar cuatos registros tenemos en las tablas
+	public function index(){	
 
-		$data = array(
-		/*	"cantEstudiantes" => $this->Backend_model->rowCount("estudiantes"),
-			"cantAperturas" => $this->Backend_model->rowCount("aperturas"),
-			"cantCursos" => $this->Backend_model->rowCount("cursos"),
-			"sumaPagos" => $this->Backend_model->rowSuma("pagos"),
-			"years" => $this->Pagos_model->years(),
-*/
-		);
+		$data = array();
+
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
 		$this->load->view("admin/dashboard", $data);

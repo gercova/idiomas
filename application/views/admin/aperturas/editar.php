@@ -1,4 +1,3 @@
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -21,65 +20,52 @@
                                 <p><i class="icon fa fa-ban"></i><?php echo $this->session->flashdata("error"); ?></p>
                              </div>
                         <?php endif;?>
+<<<<<<< HEAD
+                        <form action="<?php echo base_url('prematriculas/aperturas/store');?>" method="POST" id="myForm">
+=======
                         <form action="<?php echo base_url();?>movimientos/aperturas/update" method="POST" id="myForm">
 
+>>>>>>> 65dade8070fd25ab25ce9971fb4f77ccf119140b
 							<input type="hidden" name="idapertura" value="<?php echo $apertura->id;?>">
-							
-                           <div class="form-group <?php echo form_error('curso') == true ? 'has-error':''?>">
+                            <div class="form-group">
                                 <div class="col-md-6">
                                     <label for="">CURSO:</label>
-                                        <input type="hidden" name="idcurso" id="idcurso" value="<?php echo form_error("idcurso") !=false ? set_value("idcurso") : $apertura->curso_id;?>">
-                                        <input type="text" size="100%" class="form-control" name="curso" id="curso" readonly  value="<?php echo form_error("curso") !=false ? set_value("curso") : $apertura->descripcion." - ".$apertura->curso;?>">
-                                    <?php echo form_error("curso","<span class='help-block'>","</span>");?>
+                                    <input type="hidden" name="idcurso" id="idcurso" value="<?php echo form_error("idcurso") !=false ? set_value("idcurso") : $apertura->cursos_id;?>">
+                                    <input type="text" size="100%" class="form-control" name="curso" id="curso" readonly  value="<?php echo form_error("curso") !=false ? set_value("curso") : $apertura->curso." - ".$apertura->curso;?>">
                                 </div> 
                             </div>
-
-                            <div class="form-group <?php echo form_error('grupo') == true ? 'has-error':''?>">
-                                <div class="col-md-6">
-                                    <label for="">GRUPO DE CLASES :</label>
-                                        <input type="hidden" name="idgrupo" id="idgrupo" value="<?php echo form_error("idgrupo") !=false ? set_value("idgrupo") : $apertura->grupo_id;?>">
-                                        <input type="text" class="form-control" size="100%" data-toggle="modal" data-target="#modal-grupo" name="grupo" id="grupo" readonly  value="<?php echo form_error("grupo") !=false ? set_value("grupo") : $apertura->grupo." ".$apertura->hora_ini." ".$apertura->hora_fin;?>">
-                                    <?php echo form_error("grupo","<span class='help-block'>","</span>");?>
-                                </div> 
-                            <div class="form-group col-md-12">           
-                            </div>
-
-                            <div class="form-group <?php echo form_error('fecha_ini') == true ? 'has-error' : '' ?>">
-                                <div class="col-md-6">
-                                    <label for="">FECHA INICIO (tentativa):</label>
-                                        <input type="date"  class="form-control" name="fecha_ini" id="fecha_ini" value="<?php echo form_error("fecha_ini") !=false ? set_value("fecha_ini") : $apertura->fecha_ini;?>">
-        
-                                    <?php echo form_error("fecha_ini", "<span class='help-block'>", "</span>"); ?>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group <?php echo form_error('sede_id') == true ? 'has-error':''?>">
+                            <div class="form-group">
                                 <div class="form-group col-md-6">
                                     <label for="sede_id">Sede  : </label>
-                                    <select  class="form-control" id="sede_id" name="sede_id">
+                                    <select  class="form-control" id="idsede" name="idsede">
+                                        <option value="">-- Seleccione sede --</option>
                                         <?php foreach ($sedes as $s) : ?>
-                                            <?php $sel = $apertura->sede_id==$s->id?'selected':'' ?>
-                                        <option value="<?php echo $s->id;?>" <?php echo $sel; ?> ><?php echo $s->nombre;?></option>
+                                            <option value="<?php echo $s->id;?>" <?php echo $s->id == $apertura->sede_id ? 'selected':'';?> ><?php echo $s->descripcion;?></option>
                                         <?php endforeach; ?>
                                     </select>     
                                 </div>                           
                             </div>
 
-                            <div class="form-group <?php echo form_error('estado_inscripcion') == true ? 'has-error':''?>">
+                            <div class="form-group">
                                 <div class="col-md-6">
-                                <label for="estado">Inscripcion web : </label>
-                                <select  class="form-control" id="estado_inscripcion" name="estado_inscripcion">
-                                    <option <?= $apertura->estado_inscripcion=='abierto'? 'selected':'' ?> value="abierto">Abierto</option>
-                                    <option <?= $apertura->estado_inscripcion=='cerrado'? 'selected':'' ?> value="cerrado">Cerrado</option>
-                                </select>       
+                                    <label for="">FECHA INICIO (tentativa):</label>
+                                    <input type="date"  class="form-control" name="fecha_ini" id="fecha_ini" value="<?php echo form_error("fecha_ini") !=false ? set_value("fecha_ini") : $apertura->fecha;?>">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <label for="estado">Inscripcion web : </label>
+                                    <select  class="form-control" id="estado_inscripcion" name="estado_inscripcion">
+                                        <option <?php $apertura->act_web == '1'? 'selected':''; ?> value="1">Abierto</option>
+                                        <option <?php $apertura->act_web == '0'? 'selected':''; ?> value="0">Cerrado</option>
+                                    </select>       
                                 </div>                        
                             </div>
-                           
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-success btn-flat">Guardar</button>
+                                    <button type="submit" class="btn btn-success pull-right">Guardar</button>
                                 </div>
-                                
                             </div>
                         </form>
                     </div>
@@ -92,9 +78,6 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
-
-
 <div class="modal fade bd-example-modal-lg" id="modal-curso">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">

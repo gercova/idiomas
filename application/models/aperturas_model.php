@@ -18,9 +18,13 @@ class aperturas_model extends CI_Model {
     }
 
     public function getapertura($id){
-        $query = $this->db->where('id', $id)
-            ->where('estado', '1')
-            ->get('aperturas');
+        $query = $this->db->select('a.id, a.cursos_id, c.descripcion curso, a.sede_id, s.descripcion sede, a.act_web, a.fec_ini fecha')
+            ->from('aperturas a')
+            ->join('cursos c', 'a.cursos_id = c.id')
+            ->join('sedes s', 'a.sede_id = s.id')
+            ->where('a.estado', '1')
+            ->where('a.id', $id)
+            ->get();
         return $query->row();
     }
 

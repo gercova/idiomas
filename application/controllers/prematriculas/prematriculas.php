@@ -1,8 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+class prematriculas extends CI_Controller {
 
-class prematriculas extends CI_Controller
-{
 	private $permisos; /* crear para permisos de modulos  */
 	public function __construct(){	
         parent::__construct();
@@ -41,12 +40,13 @@ class prematriculas extends CI_Controller
 		$data['carreras'] = $this->carreras_model->getcarreras();
 	    $this->view_model->render_view('admin/prematriculas/agregar', $data, $content_route = null);
     }
-	public function buscarestud()
-	{
+	
+    public function buscarestud(){
 		$dni = $this->input->post("dni");
 		$this->prematriculas_model->buscarestu($dni);
 	}
-	public function store(){
+	
+    public function store(){
         $id                 = $this->input->post('idprematrcila');
         $data['estudiante_id']  = $this->input->post('estudiante_id');
         $data['apertura_id']    = $this->input->post('apertura_id');
@@ -65,7 +65,6 @@ class prematriculas extends CI_Controller
                 $this->session->set_flashdata('error','No se pudo guardar la información');
 				$this->add();
             }
-           
         }elseif(isset($id)){
             if($this->prematriculas_model($id, $data)){
                 redirect(base_url("admin/prematriculas"));

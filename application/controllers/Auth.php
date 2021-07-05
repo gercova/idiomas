@@ -7,12 +7,11 @@ class Auth extends CI_Controller {
 		parent::__construct();
 		$this->load->model("usuarios_model");
 	}
-	public function index()
-	{
-		if ($this->session->userdata("login")) {
-			redirect(base_url()."dashboard");
-		}
-		else{
+	
+	public function index(){
+		if($this->session->userdata("login")) {
+			redirect(base_url("dashboard"));
+		}else{
 			$this->load->view("admin/login");
 		}
 		
@@ -27,8 +26,7 @@ class Auth extends CI_Controller {
 		if (!$res) {
 			$this->session->set_flashdata("error","El usuario y/o contraseña son incorrectos");
 			redirect(base_url());
-		}
-		else{
+		}else{
 			$data  = array(
 				'id' => $res->id, 
 				'nombre' => $res->nombres,
@@ -36,7 +34,7 @@ class Auth extends CI_Controller {
 				'login' => TRUE
 			);
 			$this->session->set_userdata($data);
-			redirect(base_url()."dashboard");
+			redirect(base_url("dashboard"));
 		}
 	}
 

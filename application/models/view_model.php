@@ -17,5 +17,7 @@ class view_model extends CI_Model {
             $this->load->view($content_route);
         }
     }
+    
+    # esto es un comentario
 
 }
