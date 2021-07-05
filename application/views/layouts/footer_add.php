@@ -1,10 +1,15 @@
-
-
 <script src="<?php echo base_url();?>assets/template/swalalert2.js"></script>
 
 <script>
 //Función para mostrar alerta
 function mostrarAlert(icon, title){
+    Swal.fire({
+        icon: icon,
+        title: title,
+    });
+}
+
+function mostrarAgragar(icon, title){
     Swal.fire({
         icon: icon,
         title: title,

@@ -25,14 +25,14 @@ class aperturas extends CI_Controller {
     public function add(){
         $data['cursos'] = $this->cursos_model->getcursos();
         $data['sedes'] = $this->sedes_model->getsedes();
-        $this->view_model->render_view('admin/aperturas/agregar', $data, $content_route = null);
+        $this->view_model->render_view('admin/aperturas/agregar', $data, 'content/c_aperturas');
     }
 
     public function edit($id){
-        $data['agregado'] = $this->aperturas_model->getapertura($id);
+        $data['apertura'] = $this->aperturas_model->getapertura($id);
         $data['cursos'] = $this->cursos_model->getcursos();
         $data['sedes'] = $this->sedes_model->getsedes();
-        $this->view_model->render_view('admin/aperturas/editar', $data, $content_route = null);
+        $this->view_model->render_view('admin/aperturas/editar', $data, 'content/c_aperturas');
     }
 
     public function store(){
@@ -54,8 +54,8 @@ class aperturas extends CI_Controller {
             }
            
         }elseif(isset($id)){
-            if($this->aperturas_model($id, $data)){
-                redirect(base_url("admin/aperturas"));
+            if($this->aperturas_model->update($id, $data)){
+                redirect(base_url("prematriculas/aperturas"));
             }else{
                 $this->session->set_flashdata('error','No se pudo actualizar la información');
 				$this->edit($id);

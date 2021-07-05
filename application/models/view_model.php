@@ -12,9 +12,12 @@ class view_model extends CI_Model {
 		$this->load->view('layouts/aside');
 		$this->load->view($route, $data);
 		$this->load->view('layouts/footer');
+        $this->load->view('layouts/footer_add');
         if($content_route !== null){
             $this->load->view($content_route);
         }
     }
+    
+    # esto es un comentario
 
 }

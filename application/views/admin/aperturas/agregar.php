@@ -21,49 +21,45 @@
 							</div>
 				            </div>
 						<?php endif; ?>
-						<form action="<?php echo base_url('prematriculas/aperturas/store'); ?>" method="POST">
-
+						<form action="<?php echo base_url('prematriculas/aperturas/store');?>" method="POST" id="myForm">
 							<div class="form-group">
 								<div class="col-md-6">
 									<label for="">CURSO:</label>
-										<input type="hidden" name="idcurso" id="idcurso" value="<?php echo set_value("idcurso"); ?>">
-										<input type="text" size="100%"class="form-control" data-toggle="modal" data-target="#modal-curso" name="curso" id="curso" readonly value="<?php echo set_value("curso"); ?>" required>
-		
+									<input type="hidden" name="idcurso" id="idcurso" value="<?php echo set_value("idcurso"); ?>">
+									<input type="text" placeholder="Agregar curso" size="100%"class="form-control" data-toggle="modal" data-target="#modal-curso" name="curso" id="curso" readonly value="<?php echo set_value("curso");?>" required>
 								</div>
 							</div>
-
                             <div class="form-group">
 								<div class="form-group col-md-6">
 	                                <label for="sede_id">SEDE  : </label>
 	                                <select  class="form-control" id="idsede" name="idsede" required>
+										<option value="">-- Seleccione sede --</option>
 	                                	<?php foreach ($sedes as $s) : ?>
 										    <option value="<?php echo $s->id;?>" ><?php echo $s->descripcion;?></option>
 										<?php endforeach; ?>
 	                                </select>    
                                 </div>                           
                             </div>
-
 							<div class="form-group">
 								<div class="col-md-6">
 									<label for="">FECHA INICIO (tentativa):</label>
-									<input type="date"  class="form-control" name="fecha_ini" id="fecha_ini" value="<?php echo set_value("fecha_ini")? set_value("fecha_ini"):date('Y-m-d'); ?>">
+									<input type="date" class="form-control" name="fecha_ini" id="fecha_ini" value="<?php echo set_value("fecha_ini");?>" required>
 								</div>
 							</div>
-	
 							<div class="form-group">
 								<div class="form-group col-md-6">
 	                                <label for="estado_inscripcion">Estado inscripcion  : </label>
-	                                <select  class="form-control" id="estado_inscripcion" name="estado_inscripcion">
-	                                    <option selected value="abierto">Abierto</option>
-	                                    <option value="cerrado">Cerrado</option>
+	                                <select class="form-control" id="estado_inscripcion" name="estado_inscripcion" required>
+										<option value="">-- Seleccione estado --</option>
+	                                    <option value="1">Abierto</option>
+	                                    <option value="0">Cerrado</option>
 	                                </select>    
                                 </div>                           
                             </div>
 							<div class="form-group">
 								<div class="col-md-12">
-									<button type="submit" class="btn btn-success pull-right ">Guardar</button>
+									<button type="submit" class="btn btn-success pull-right">Guardar</button>
 								</div>
-
 							</div>
 						</form>
 					</div>
@@ -76,7 +72,6 @@
 	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
 <div class="modal fade bd-example-modal-lg" id="modal-curso">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
@@ -91,18 +86,22 @@
 						<tr>
 							<th>#</th>
 							<th>NOMBRE</th>
+							<th>NIVEL</th>
+							<th>CICLO</th>
 							<th>OPCIÓN</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php if (!empty($cursos)) : ?>
-							<?php foreach ($cursos as $curso) : ?>
+							<?php foreach ($cursos as $c) : ?>
 								<tr>
-									<td><?php echo $curso->id; ?></td>
-									<td><?php echo $curso->descripcion; ?></td>
-									<?php $datacurso = $curso->id."*".$curso->costo; ?>
+									<td><?php echo $c->id; ?></td>
+									<td><?php echo $c->descripcion; ?></td>
+									<td><?php echo $c->ciclo; ?></td>
+									<td><?php echo $c->nivel; ?></td>
+									<?php $datacurso = $c->id.'*'.$c->descripcion; ?>
 									<td>
-										<button type="button" class="btn btn-success btn-cursoape" value="<?php echo $datacurso; ?>"><span class="fa fa-check"></span></button>
+										<button id="btn-cursoape" type="button" class="btn btn-success" value="<?php echo $datacurso; ?>"><span class="fa fa-check"></span></button>
 									</td>
 								</tr>
 							<?php endforeach; ?>
