@@ -9,13 +9,6 @@ function mostrarAlert(icon, title){
     });
 }
 
-function mostrarAgragar(icon, title){
-    Swal.fire({
-        icon: icon,
-        title: title,
-    });
-}
-
 var statusSend = false;
 
 //Requiere añadir "id=myForm" a elemento form
@@ -23,10 +16,10 @@ document.getElementById("myForm").onsubmit = function() { return checkSubmit()};
 document.getElementById("myForm1").onsubmit = function() { return checkSubmit()};
 document.getElementById("actualizar").onsubmit = function() { return Submit()};
 function checkSubmit() {
-	mostrarAlert('warning','Datos agregados ...');
+	mostrarAlert('success','Datos agregados ...');
     if (!statusSend) {
         statusSend = true;
-        timer = 1500;
+        timer = 2500;
         return true;
     } else {
         //alert("El formulario ya se esta enviando...");
@@ -35,10 +28,10 @@ function checkSubmit() {
 }
 
 function Submit() {
-	mostrarAlert('warning','Datos Actualizados ...');
+	mostrarAlert('success','Datos Actualizados ...');
     if (!statusSend) {
         statusSend = true;
-        timer = 1500;
+        timer = 2500;
         return true;
     } else {
         //alert("El formulario ya se esta enviando...");

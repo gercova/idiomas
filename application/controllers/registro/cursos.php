@@ -52,6 +52,7 @@ class cursos extends CI_Controller {
 	}
 	
 	public function store(){
+
 		$idusuario 		= $this->session->userdata("id");
 		$id 			= $this->input->post("id");
 		$descripcion 	= $this->input->post("descripcion");
@@ -88,6 +89,7 @@ class cursos extends CI_Controller {
 			}
 		}else{
 			$data  = array(
+
 				'ciclo_id' 		=> $ciclos,
 				'nivel_id' 		=> $niveles,
 				'descripcion' 	=> $descripcion,

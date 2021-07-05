@@ -41,7 +41,11 @@ class cursos_model extends CI_Model {
 	}
 
 	public function getedit($id){
+<<<<<<< HEAD
+		/// cargar datos docente aula fechas del mantenimiento add prematricula
+=======
 		# cargar datos docente aula fechas del mantenimiento add prematricula
+>>>>>>> 99496fdacf299b55b5afafc198ae45741a2cbbc3
 		$resultado = $this->db->select("id,ciclo_id as ciclos, nivel_id as niveles, descripcion, silabus, act_web as web")
 			->from("cursos")
 			->where("id",$id)
@@ -53,6 +57,16 @@ class cursos_model extends CI_Model {
 			echo json_encode($resultado->result());
 		}
 	}
+<<<<<<< HEAD
+	public function getcurso($id){ /** para la opcion editar **/
+		$resultados= $this->db->select("c.id, c.descripcion, ci.descripcion as ciclo, n.descripcion as nivel")
+				->from("cursos as c")
+				->join("niveles as n", "c.nivel_id = n.id")
+				->join("ciclos as ci", "c.ciclo_id = ci.id")
+				->where("c.id", $id)
+				->get();
+		//$resultado = $this->db->get();
+=======
 	public function getcurso($id){ 
 		# para la opcion editar 
 		$resultados= $this->db->select("c.id, c.descripcion, ci.descripcion as ciclo, n.descripcion as nivel")
@@ -61,6 +75,7 @@ class cursos_model extends CI_Model {
 			->join("ciclos as ci", "c.ciclo_id = ci.id")
 			->where("c.id", $id)
 			->get();
+>>>>>>> 99496fdacf299b55b5afafc198ae45741a2cbbc3
 		return $resultados->row();
 	}
 

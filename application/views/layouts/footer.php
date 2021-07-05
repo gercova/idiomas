@@ -51,6 +51,8 @@
 <script src="<?php echo base_url();?>assets/template/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url();?>assets/template/dist/js/demo.js"></script>
+<script src="<?php echo base_url();?>scripts/estudiantes.js"></script>
+<script src="<?php echo base_url();?>scripts/prematriculas.js"></script>
 <script>
 var base_url= "<?php echo base_url();?>";
 $(document).ready(function () {
@@ -329,6 +331,9 @@ $('.time-picker2').timepicker({
         $("#modal-estudiante").modal("hide");
     });
     /// BUSCAR ESTUDIANTE
+<<<<<<< HEAD
+  
+=======
     $("#btn-buscarestu").on("click", function(event) {             
         if($("#dni").val()) {
             var uno = $("#dni").val();
@@ -346,6 +351,7 @@ $('.time-picker2').timepicker({
             alert("Ingrese DNI/RUC del Estudiante");
         }
     });
+>>>>>>> 99496fdacf299b55b5afafc198ae45741a2cbbc3
     /// seleccionar el nivel academico en el formulario prematricula 
     $(document).on("click",".btn-nivelpre",function(){
         nivel = $(this).val();
@@ -356,6 +362,9 @@ $('.time-picker2').timepicker({
         $("#modal-nivel").modal("hide");
     });
     /// seleccionar apertura de cursos en formulario prematricula
+<<<<<<< HEAD
+
+=======
     $(document).on("click",".btn-apertura",function(){
         apertura = $(this).val();
         infoapertura = apertura.split("*");
@@ -365,6 +374,7 @@ $('.time-picker2').timepicker({
         $("#curso").val(infoapertura[6]);
         $("#modal-apertura").modal("hide");
     });
+>>>>>>> 99496fdacf299b55b5afafc198ae45741a2cbbc3
     /// calcular el pago del alumno por curso
     $("#btn-calcular-pago").on("click",function(){
         data = $("#costo").val()+ "*"+$("#porcentaje").val()+ "*"+$("#descuento").val();
@@ -841,54 +851,7 @@ $("#btn-agregar-duplicado").on("click",function(){
 
 
 ///// APIIII   DNI RENIEC Y SUNAT
-$("#btn-consultar-dni").on("click", function(event) {
-         //console.log("ggfg");
-        switch ($("#tipodocumento").val()) {
-            case "1":
-                if($("#dni").val().length == 8){
-                    let documento = $("#dni").val();
-                    $.ajax({
-                            url: base_url + "registrar/estudiantes/getDNI",
-                            method: "POST",
-                            data:{documento},
-                            dataType: "json"
-                    })
-                        .done(function(result) {
-                        let name = result.data;
-                        name = name.split("|");
-                        name = `${name[0]} ${name[1]} ${name[2]}`;
-                        $("#nombre").val(name);
-                        })
-                        .fail(function(jqXHR, textStatus, errorThrown) {
-                        });
-                    }else{
-                        alert("Ingrese el número del DNI");
-                    }
-            break;
-            case "2":
-                if($("#dni").val().length == 11){
-                    let documento = $("#dni").val();
-                    $.ajax({
-                            url: base_url + "registrar/estudiantes/getRUC",
-                            method: "POST",
-                            data:{documento},
-                            dataType: "json"
-                    })
-                        .done(function(result) {
-                            $("#nombre").val(result.razonSocial);
-                            $("#direccion").val(result.direccion);
-                        })
-                        .fail(function(jqXHR, textStatus, errorThrown) {
-                        });
-                    }else{
-                        alert("Ingrese el número del RUC");
-                    }
-                break;
-            default:
-                break;
-        }
-     
-	 });
+
 
 ///// GRAFICAS Y REPORTES GRAFICOS DE INGRESOS
 

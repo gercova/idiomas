@@ -12,6 +12,17 @@ class Carreras_model extends CI_Model {
 		$this->db->order_by('a.id', 'DESC');
 		return [$this->db->get()->result_array(), $cont];
 	} 
+	public function getcarreras()
+	{	$this->db->select("*");
+		$this->db->from("carreras");
+		$this->db->order_by("id","ASC");
+		$resultados = $this->db->get();
+		if ($resultados->num_rows() > 0) {
+			return $resultados->result();
+		} else {
+			return false;
+		}
+	}
 
 	public function save($data){ 
 		# guarda los carreras 

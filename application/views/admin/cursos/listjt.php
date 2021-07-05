@@ -32,10 +32,6 @@
                 <input class="grandes" type="text" name="descripcion" id="descripcion" autocomplete="off" required>
               </div>
               <div class="form-group row">
-                  <div class="col-lg-5">
-                      <label for="costo" class="labelfor">Costo:</label>
-                      <input class="grandes" type="text" name="costo" id="costo" pattern="^[0-9]+([,][0-9]+)?$" autocomplete="off" required>
-                  </div>
                   <div class="col-lg-7">
                     <label for="silabus" class="labelfor">Silabus:</label>
                     <input class="grandes" type="file" name="silabus" id="silabus">
