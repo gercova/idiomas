@@ -14,6 +14,18 @@ class tipos_model extends CI_Model {
 		return [$this->db->get()->result_array(), $cont];
 	} 
 
+	public function gettipos()
+	{	$this->db->select("*");
+		$this->db->from("tipos");
+		$this->db->order_by("id","ASC");
+		$resultados = $this->db->get();
+		if ($resultados->num_rows() > 0) {
+			return $resultados->result();
+		} else {
+			return false;
+		}
+	}
+
 	public function save($data){ /** guarda los tipos */
 		return $this->db->insert("tipos",$data);
 	}

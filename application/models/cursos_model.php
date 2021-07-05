@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class cursos_model extends CI_Model {
 
 	public function getcursos(){
-		$resultados = $this->db->select("c.id, c.descripcion, ci.descripcion as ciclo, n.descripcion as nivel, c.costo")
+		$resultados = $this->db->select("c.id, c.descripcion, ci.descripcion as ciclo, n.descripcion as nivel")
 			->from("cursos as c")
 			->join("niveles as n", "c.nivel_id = n.id")
 			->join("ciclos as ci", "c.ciclo_id = ci.id")
@@ -18,7 +18,7 @@ class cursos_model extends CI_Model {
 
 	public function grilla($starIndex, $pageSize, $buscar){
 		$cont = $this->db->where("estado", '1')->from('cursos')->count_all_results(); 
-		$this->db->select("c.id, c.descripcion,n.descripcion as nivel,ci.descripcion as ciclo,c.silabus, c.costo,c.act_web as web");
+		$this->db->select("c.id, c.descripcion,n.descripcion as nivel,ci.descripcion as ciclo,c.silabus,c.act_web as web");
 		$this->db->from("cursos as c");
 		$this->db->join("ciclos as ci", "c.ciclo_id = ci.id");
 		$this->db->join("niveles as n", "c.nivel_id = n.id");
@@ -40,7 +40,7 @@ class cursos_model extends CI_Model {
 
 	public function getedit($id){
 		/// cargar datos docente aula fechas del mantenimiento add prematricula
-		$resultado = $this->db->select("id,ciclo_id as ciclos, nivel_id as niveles, descripcion, costo, silabus, act_web as web")
+		$resultado = $this->db->select("id,ciclo_id as ciclos, nivel_id as niveles, descripcion, silabus, act_web as web")
 			->from("cursos")
 			->where("id",$id)
 			->where("estado","1")
@@ -52,7 +52,7 @@ class cursos_model extends CI_Model {
 		}
 	}
 	public function getcurso($id){ /** para la opcion editar **/
-		$resultados= $this->db->select("c.id, c.descripcion, ci.descripcion as ciclo, n.descripcion as nivel, c.costo")
+		$resultados= $this->db->select("c.id, c.descripcion, ci.descripcion as ciclo, n.descripcion as nivel")
 				->from("cursos as c")
 				->join("niveles as n", "c.nivel_id = n.id")
 				->join("ciclos as ci", "c.ciclo_id = ci.id")

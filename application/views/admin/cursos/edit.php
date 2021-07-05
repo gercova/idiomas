@@ -1,4 +1,4 @@
-!-- Content Wrapper. Contains page content -->
+
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -87,7 +87,8 @@
 												<td><input type="text" class="grandes" name="nombremodulo[]" value="<?php echo $modulos->descripcion; ?>"></td>
 												<td><input type="text" class="pequeños" name="abreviaturamodulo[]" value="<?php echo $modulos->abreviatura; ?>"></td>
 												<td></td>
-												<td><a title="Eliminar detalle del contenido" href="<?php echo base_url();?>registro/cursos/deletemodulo/<?php echo $modulos->id;?>/<?php echo $curso->id;?>" class="btn btn-danger"><span class='fa fa-remove' ></span></a></td>		
+												<!---href="<?php echo base_url('registro/cursos/deletemodulo/'.$modulos->id.'/'.$curso->id);?>-->
+												<td><a title="Eliminar detalle del contenido"  href="javascript:void(0)" class="btn btn-danger delete-padre" data-id="<?php echo $data = $curso->id.'*'.$modulos->id;?>"><span class='fa fa-remove' ></span></a></td>		
 											</tr>
 											<?php if (!empty($submodulo)) : ?>
 												<?php foreach ($submodulo as $submodulos) : ?>
@@ -97,7 +98,7 @@
 														<td><input type="text" class="grandes" name="nombresubmodulo[]" value="<?php echo $submodulos->descripcion; ?>"></td>
 														<td><input type="text"  class="pequeños" name="horasubmodulo[]" value="<?php echo $submodulos->horas; ?>"></td>
 														<td>S/. <input type="text" class="pequeños" name="costosubmodulo[]" value="<?php echo $submodulos->costo; ?>"></td>
-														<td><a title="Eliminar detalle del contenido" href="<?php echo base_url();?>registro/cursos/deletesubmodulo/<?php echo $submodulos->id;?>/<?php echo $curso->id;?>" class="btn btn-danger" id="eliminar"><span class='fa fa-remove' ></span></a></td>
+														<td><a title="Eliminar detalle del contenido" href="<?php echo base_url('registro/cursos/deletesubmodulo/'.$submodulos->id.'/'.$curso->id);?>" class="btn btn-danger delete-hijo" id="eliminar"><span class='fa fa-remove' ></span></a></td>
 													</tr>
 													<?php } ?>
 												<?php endforeach; ?>

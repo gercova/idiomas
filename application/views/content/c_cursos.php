@@ -6,7 +6,6 @@
             $('#modalCRUD').on('hidden.bs.modal', function (e) {
                 $("#id").val('').prop('disabled', false);
                 $("#descripcion").val('').prop("disabled", false);
-                $("#costos").val('').prop("disabled", false);
                 $("#silabus").val('').prop("disabled", false);
                 $("#ciclos").val('').prop("disabled", false);
                 $("#niveles").val('').prop("disabled", false);
@@ -136,7 +135,6 @@
                     
                 },
                 
-
                     recordsLoaded: (event, data) => {
                     if (permisos.insert === '1'){
                         const newButton = document.getElementsByClassName('jtable-toolbar-item')[1];
@@ -167,8 +165,7 @@
                             // console.log(result);
                                 $("#id").val(result.id).prop("disabled", false);
                                 $("#descripcion").val(result.descripcion).prop("disabled", false);
-                                $("#costo").val(result.costo).prop("disabled", false);
-                               // $("#silabus").val(result.silabus).prop("disabled", false);
+                                // $("#silabus").val(result.silabus).prop("disabled", false);
                                 $("#ciclos").val(result.ciclos).prop("disabled", false);
                                 $("#niveles").val(result.niveles).prop("disabled", false);
                                 $("#web").val(result.web).prop("disabled", false);
@@ -199,7 +196,6 @@
                             // console.log(result);
                                 $("#id").val(result.id).prop("disabled", true);
                                 $("#descripcion").val(result.descripcion).prop("disabled", true);
-                                $("#costo").val(result.costo).prop("disabled", true);
                                // $("#silabus").val(result.silabus).prop("disabled", true);
                                 $("#ciclos").val(result.ciclos).prop("disabled", true);
                                 $("#niveles").val(result.niveles).prop("disabled", true);
@@ -270,39 +266,7 @@ const newRecord = () => {
     $("#modalCRUD").modal("show");        
     id="";
     }
-/*
-$("#form_cursos").submit(function(e){
-   e.preventDefault();  
-   // console.log(email);
-    id =$.trim($("#id").val());    
-    descripcion = $.trim($("#descripcion").val());
-    costo = $.trim($("#costo").val());
-    silabus = $.trim($("#silabus").val());
-    ciclos = $.trim($("#ciclos").val());
-    niveles = $.trim($("#niveles").val());
-    web = $.trim($("#web").val());
 
-    $.ajax({
-        url: "<?php echo base_url(); ?>registrar/cursos/store",
-     //   type: "POST",
-      //  dataType: "json",
-        type:$("form").attr("method"),
-        data: {id:id, ciclos:ciclos, niveles:niveles, descripcion:descripcion, costo:costo, silabus:silabus, web:web},
-       // data:{guardar},
-        success: function(data){  
-            console.log(data)
-                Swal.fire({
-              //  position: 'top-end',
-                icon: 'success',
-                title: 'Los datos se Guardaron Correctamente',
-                showConfirmButton: false,
-                timer: 1500,
-                })
-                LoadRecordsButton.click();
-                $("#modalCRUD").modal("hide");    
-        }        
-    });*/
-  
 
    $("#form_cursos").submit(function(e){
    e.preventDefault();  
@@ -332,6 +296,48 @@ $("#form_cursos").submit(function(e){
         }        
     });
 
+    /*=============================================
+    ELIMINAR IMAGEN RADIOLÓGICA
+    =============================================*/
+    (function(){
+    $('tr td .delete-padre').click(function(ev){
+        ev.preventDefault();
+        var id = $(this).attr('data-id');
+        var data = id.split('*');
+        var self = this;
+        Swal.fire({
+        title: '¿Está seguro de borrar este registro?',
+        text: "¡Si no lo está puede cancelar la acción!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Si, borrar registro!'
+        }).then((result)=>{
+        if(result.value){
+            $.ajax({
+            url: base_url + 'registro/cursos/deletemodulo/' + data[0] + '/' + data[1],
+            type: 'POST',
+            data: {'id': id, },
+            success: function(){
+                $(self).parents('tr').remove();
+                alertify.notify('El registro se borró del sistema', 'success', 5, function(){
+                console.log('dismissed'); 
+                });
+            }, statusCode: {
+                400: function(data){
+                var json = JSON.parse(data.responseText);
+                alertify.notify(json.msg, 'error', 5, function(){
+                    console.log('dismissed'); 
+                });
+                }
+            }
+            })
+        }
+        })
+    })
+    })
 });
 </script>
 

@@ -56,13 +56,14 @@ class cursos extends CI_Controller
 		$this->load->view("layouts/aside");
 		$this->load->view("admin/cursos/edit",$data);
 		$this->load->view("layouts/footer");
+		$this->load->view("content/c_cursos");	
 		$this->load->view("layouts/footer_add");
 	}
 	public function store(){
 		$idusuario = $this->session->userdata("id");
 		$id = $this->input->post("id");
 		$descripcion = $this->input->post("descripcion");
-		$costo = $this->input->post("costo");
+		//$costo = $this->input->post("costo");
 		//$silabus = $this->input->post("silabus");
 		$ciclos = $this->input->post("ciclos");
 		$niveles = $this->input->post("niveles");
@@ -82,7 +83,6 @@ class cursos extends CI_Controller
 				'ciclo_id' => $ciclos,
 				'nivel_id' => $niveles,
 				'descripcion' => $descripcion,
-				'costo' => $costo,
 				'silabus' => $archivo['upload_data']['file_name'],
 				'act_web' => $web,
 				'usu_reg' => $idusuario,
@@ -106,7 +106,6 @@ class cursos extends CI_Controller
 				'ciclo_id' => $ciclos,
 				'nivel_id' => $niveles,
 				'descripcion' => $descripcion,
-				'costo' => $costo,
 				//'silabus' => $archivo['upload_data']['file_name'],
 				'act_web' => $web,
 				'usu_reg' => $idusuario,
