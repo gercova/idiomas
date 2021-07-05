@@ -50,6 +50,7 @@ class cursos extends CI_Controller {
 
 		$this->view_model->render_view('admin/cursos/edit', $data, 'layouts/footer_add');
 	}
+	
 	public function store(){
 		$idusuario 		= $this->session->userdata("id");
 		$id 			= $this->input->post("id");
@@ -76,7 +77,6 @@ class cursos extends CI_Controller {
 				'usu_reg' 		=> $idusuario,
 				'fec_reg' 		=> date('Y-m-d'),
 				'estado' 		=> "1",
-	
 			);
 	
 			if ($id<=0) {

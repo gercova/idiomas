@@ -9,9 +9,6 @@ class aperturas extends CI_Controller {
         $this->load->model('aperturas_model');
 		$this->load->model('view_model');
 		$this->load->model('cursos_model');
-		$this->load->model('ciclos_model');
-		$this->load->model('niveles_model');
-		$this->load->model('dias_model');
 		$this->load->model('sedes_model');
 	}
 
@@ -29,9 +26,9 @@ class aperturas extends CI_Controller {
     }
 
     public function edit($id){
-        $data['apertura'] = $this->aperturas_model->getapertura($id);
-        $data['cursos'] = $this->cursos_model->getcursos();
-        $data['sedes'] = $this->sedes_model->getsedes();
+        $data['apertura']   = $this->aperturas_model->getapertura($id);
+        $data['cursos']     = $this->cursos_model->getcursos();
+        $data['sedes']      = $this->sedes_model->getsedes();
         $this->view_model->render_view('admin/aperturas/editar', $data, 'content/c_aperturas');
     }
 
