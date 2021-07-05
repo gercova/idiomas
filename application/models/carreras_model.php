@@ -13,16 +13,19 @@ class Carreras_model extends CI_Model {
 		return [$this->db->get()->result_array(), $cont];
 	} 
 
-	public function save($data){ /** guarda los carreras */
+	public function save($data){ 
+		# guarda los carreras 
 		return $this->db->insert("carreras", $data);
 	}
 
-	public function update($id,$data){ /** actualiza los datos **/
+	public function update($id,$data){ 
+		# actualiza los datos 
 		$this->db->where("id",$id);
 		return $this->db->update("carreras",$data);
 	}
 
-	public function getedit($id){ /// cargar datos docente aula fechas del mantenimiento add prematricula
+	public function getedit($id){ 
+		# cargar datos docente aula fechas del mantenimiento add prematricula
 		$this->db->select("*");
 		$this->db->from("carreras");
 		$this->db->where("id",$id);

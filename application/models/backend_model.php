@@ -27,7 +27,7 @@ class backend_model extends CI_Model {
 		return $enlaces;
 	}
 
-	/** para contar cuantos registros tenemos en las tablas y ademas contar las ventas con la condicion **/
+	# para contar cuantos registros tenemos en las tablas y ademas contar las ventas con la condicion 
 	public function rowCount($tabla){
 		$this->db->where("estado","1");
 		$resultados = $this->db->get($tabla);

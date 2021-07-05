@@ -13,16 +13,19 @@ class aulas_model extends CI_Model {
 		return [$this->db->get()->result_array(), $cont];
 	} 
 
-	public function save($data){ /** guarda los aulas */
+	public function save($data){ 
+		# guarda los aulas 
 		return $this->db->insert("aulas",$data);
 	}
 
-	public function update($id,$data){ /** actualiza los datos **/
+	public function update($id,$data){ 
+		# actualiza los datos 
 		$this->db->where("id",$id);
 		return $this->db->update("aulas",$data);
 	}
 
-	public function getedit($id){ /// cargar datos docente aula fechas del mantenimiento add prematricula
+	public function getedit($id){ 
+		# cargar datos docente aula fechas del mantenimiento add prematricula
 		$resultado = $this->db->select("*")
 			->from("aulas")
 			->where("id",$id)
