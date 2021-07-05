@@ -53,6 +53,17 @@
                         title: 'CURSO',
                         width: '20%' ,
                     },
+<<<<<<< HEAD
+=======
+                    nivel:{
+                        title: 'NIVEL',
+                        width: '20%' ,
+                    }, 
+                    ciclo:{
+                        title: 'CICLO',
+                        width: '20%' ,
+                    },  
+>>>>>>> 65dade8070fd25ab25ce9971fb4f77ccf119140b
                     silabus:{
                         title: 'SILABUS',
                         width: '20%' ,
@@ -61,6 +72,7 @@
                              
                         }
                     },
+<<<<<<< HEAD
                     ciclo:{
                         title: 'CICLO',
                         width: '20%' ,
@@ -69,6 +81,9 @@
                         title: 'NIVEL',
                         width: '20%' ,
                     },   
+=======
+                   //if(web==1){act="MOSTRAR"},    
+>>>>>>> 65dade8070fd25ab25ce9971fb4f77ccf119140b
                     web:{
                         title: 'WEB',
                         width: '20%' ,

@@ -21,7 +21,12 @@
 							</div>
 				            </div>
 						<?php endif; ?>
+<<<<<<< HEAD
 						<form action="<?php echo base_url('prematriculas/aperturas/store');?>" method="POST" id="myForm">
+=======
+						<form action="<?php echo base_url('prematriculas/aperturas/store'); ?>" method="POST" id="myForm">
+
+>>>>>>> 65dade8070fd25ab25ce9971fb4f77ccf119140b
 							<div class="form-group">
 								<div class="col-md-6">
 									<label for="">CURSO:</label>

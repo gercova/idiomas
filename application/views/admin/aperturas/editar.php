@@ -20,7 +20,12 @@
                                 <p><i class="icon fa fa-ban"></i><?php echo $this->session->flashdata("error"); ?></p>
                              </div>
                         <?php endif;?>
+<<<<<<< HEAD
                         <form action="<?php echo base_url('prematriculas/aperturas/store');?>" method="POST" id="myForm">
+=======
+                        <form action="<?php echo base_url();?>movimientos/aperturas/update" method="POST" id="myForm">
+
+>>>>>>> 65dade8070fd25ab25ce9971fb4f77ccf119140b
 							<input type="hidden" name="idapertura" value="<?php echo $apertura->id;?>">
                             <div class="form-group">
                                 <div class="col-md-6">
