@@ -51,4 +51,19 @@ class pagos_model extends CI_Model {
 		return $this->db->insert_id();
 	}
 
+    public function getdeuda($pago_id){
+		# sacar deuda
+		$query = $this->db->select('monto')
+		    ->from('pagos')
+		    ->where('id', $pago_id)
+		    ->get();
+		return $query->row();
+	}
+
+    public function descontardeuda($id, $totaldeuda){
+		# actualiza los datos
+        $this->db->set('monto', $totaldeuda);
+		$this->db->where('id', $id);
+		return $this->db->update('pagos', $data);
+	}
 }

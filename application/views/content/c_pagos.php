@@ -136,6 +136,6 @@
     
     LoadRecordsButton.click();
     const newRecord = () => {
-        window.location.href = "<?php echo site_url('movimientos/pagos/add');?>";
+        window.location.href = "<?php echo site_url();?>movimientos/pagos/add";
     }
 </script>

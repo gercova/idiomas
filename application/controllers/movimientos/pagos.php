@@ -47,7 +47,7 @@ class pagos extends CI_Controller {
         if($this->pagos_model->save($data)){
             $pago_id = $this->pagos_model->ultimo_id();
             $this->save_detalle_pago($pago_id, $codigo_vaucher, $monto_vaucher, $fecha_vaucher);
-            redirect(base_url('admin/pagos/listjt'));
+            redirect(base_url('movimientos/pagos'));
         }else{
             $this->session->set_flashdata('error', 'No se pudo guardar la información');
 			redirect(base_url('admin/pagos/add'));
@@ -61,12 +61,12 @@ class pagos extends CI_Controller {
             $data_pay['monto']      = $monto_vaucher[$i];
             $data_pay['fecha']      = $fecha_vaucher[$i];
 
-			$this->pagos_model->save_detalles($data);
-			# $idpre  =  $prematricula_id[$i];
-			# $deudas = $this->Pagos_model->getDeudaprema($idpre);
-			# $deuda = $deudas->deuda;
-			# $totaldeuda = $deuda - $montopago[$i];
-			# $this->Pagos_model->GuadarPago($idpre, $totaldeuda);
+			$this->pagos_model->save_detalles($data_pay);
+			$id     =  $pago_id;
+			$total = $this->pagos_model->getdeuda($id);
+			$deuda  = $total->monto;
+			$totaldeuda = intval($deuda) - intval($monto_vaucher[$i]);
+			$this->pagos_model->descontardeuda($id, $totaldeuda);
 		}
 		return;
 	}

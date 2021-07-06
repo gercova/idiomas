@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="concepto">CONCEPTO:</label>
-                                    <select class="form-control" name="concepto" id="concepto">
+                                    <select class="form-control" name="idconcepto" id="idconcepto">
                                         <?php foreach($concepto as $c):?>
                                             <option value="<?php echo $c->id;?>"><?php echo $c->descripcion;?></option>
                                         <?php endforeach; ?>
