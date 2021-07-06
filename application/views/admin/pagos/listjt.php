@@ -2,10 +2,7 @@
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1>
-			PAGOS
-			<small>Listado</small>
-		</h1>
+		<h1>PAGOS <small>Listado</small></h1>
 	</section>
 	<!-- Main content -->
 	<section class="content">
@@ -17,12 +14,9 @@
                         <a href="<?php echo base_url('movimientos/pagos/add');?>" class="btn btn-primary"><span class="fa fa-plus"></span> Realizar pago nuevo</a>
                     </div>
                 </div>
-				<div class="row">
-					
-				</div>
+				<div class="row"></div>
 				<hr>
-				<div id="pagos">
-				</div>
+				<div id="pagos"></div>
 			</div>
 			<!-- /.box-body -->
 		</div>
@@ -39,9 +33,7 @@
 					<span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title">INFORMACIÓN DEL PAGO</h4>
 			</div>
-			<div class="modal-body">
-
-			</div>
+			<div class="modal-body"></div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar</button>
 			</div>

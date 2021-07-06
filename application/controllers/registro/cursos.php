@@ -14,11 +14,9 @@ class cursos extends CI_Controller {
 	}
 
 	public function index(){	
-		$data  = array(
-			'permisos' 	=> $this->permisos, /* crear para permisos de modulos  */
-			'ciclos' 	=> $this->ciclos_model->getciclos(), 
-			'niveles' 	=> $this->niveles_model->getniveles(), 
-		);
+		$data['permisos'] 	= $this->permisos; /* crear para permisos de modulos  */
+		$data['ciclos'] 	= $this->ciclos_model->getciclos(); 
+		$data['niveles'] 	= $this->niveles_model->getniveles();
 
 		$this->view_model->render_view('admin/cursos/listjt', $data, 'content/c_cursos');
 	}
@@ -41,45 +39,32 @@ class cursos extends CI_Controller {
 	}
 
 	public function modulo($id){
-		$data  = array(
-			'curso' 		=> $this->cursos_model->getcurso($id), 
-			'modulo' 		=> $this->cursos_model->getmodulo($id), 
-			'combomodulos' 	=> $this->cursos_model->getcombomodulo($id), 
-			'submodulo' 	=> $this->cursos_model->getsubmodulo($id), 
-		);
+		$data['curso'] 			= $this->cursos_model->getcurso($id);
+		$data['modulo'] 		= $this->cursos_model->getmodulo($id); 
+		$data['combomodulos'] 	= $this->cursos_model->getcombomodulo($id); 
+		$data['submodulo'] 		= $this->cursos_model->getsubmodulo($id); 
 
 		$this->view_model->render_view('admin/cursos/edit', $data, 'layouts/footer_add');
 	}
 	
 	public function store(){
 
-		$idusuario 		= $this->session->userdata("id");
-		$id 			= $this->input->post("id");
-		$descripcion 	= $this->input->post("descripcion");
-		$costo 			= $this->input->post("costo");
-		$ciclos 		= $this->input->post("ciclos");
-		$niveles 		= $this->input->post("niveles");
-		$web 			= $this->input->post("web");
+		$data['ciclo_id'] 		= $this->input->post("ciclos");
+		$data['nivel_id']		= $this->input->post("niveles");
+		$data['descripcion'] 	= $this->input->post("descripcion");
+		$data['act_web'] 		= $this->input->post("web");
+		$data['usu_reg'] 		= $this->session->userdata("id");
+		$data['fec_reg'] 		= date('Y-m-d');
+
 		$config = [
 			"upload_path" 	=> "./uploads/silabus/",
 			"allowed_types" => "pdf|xlsx|docx",
 			"max_size" 		=> "20048"
 		];
+
 		$this->load->library("upload", $config);
 		if($this->upload->do_upload("silabus")){
 			$archivo = array("upload_data" => $this->upload->data());
-			$data  = array(
-				'ciclo_id' 		=> $ciclos,
-				'nivel_id' 		=> $niveles,
-				'descripcion' 	=> $descripcion,
-				'costo' 		=> $costo,
-				'silabus' 		=> $archivo['upload_data']['file_name'],
-				'act_web' 		=> $web,
-				'usu_reg' 		=> $idusuario,
-				'fec_reg' 		=> date('Y-m-d'),
-				'estado' 		=> "1",
-			);
-	
 			if ($id<=0) {
 				$this->cursos_model->save($data);
 				echo json_encode(['sucess' => true]);
@@ -88,19 +73,7 @@ class cursos extends CI_Controller {
 				echo json_encode(['sucess' => true]);
 			}
 		}else{
-			$data  = array(
-
-				'ciclo_id' 		=> $ciclos,
-				'nivel_id' 		=> $niveles,
-				'descripcion' 	=> $descripcion,
-				'costo' 		=> $costo,
-				'act_web' 		=> $web,
-				'usu_reg' 		=> $idusuario,
-				'fec_reg' 		=> date('Y-m-d'),
-				'estado' 		=> "1",
-			);
-	
-			if ($id<=0) {
+			if($id<=0){
 				$this->cursos_model->save($data);
 				echo json_encode(['sucess' => true]);
 			}else{
@@ -111,34 +84,32 @@ class cursos extends CI_Controller {
 	}
 	
 	public function delete($id){
-		$data  = array(
-			'estado' => "0",
-		);
+		$data['estado'] = "0";
 		$this->cursos_model->update($id, $data);
 		echo json_encode(['sucess' => true]);
 	}
 
 	public function insertmodulo(){
-		$curso_id = $this->input->post("curso_id");
-		$idusuario = $this->session->userdata("id");
-		$data  = array(
-			'descripcion' => $this->input->post("descripcion_modulo"),
-			'abreviatura' => $this->input->post("abreviatura_modulo"),
-			'curso_id' =>  $curso_id,
-			'usu_reg' =>$idusuario,
-			'fec_reg' => date('Y-m-d'),
-			'estado' => "1",
+		$curso_id 	= $this->input->post("curso_id");
+		$idusuario 	= $this->session->userdata("id");
+		$data  		= array(
+			'descripcion' 	=> $this->input->post("descripcion_modulo"),
+			'abreviatura' 	=> $this->input->post("abreviatura_modulo"),
+			'curso_id' 		=> $curso_id,
+			'usu_reg' 		=> $idusuario,
+			'fec_reg' 		=> date('Y-m-d'),
+			'estado' 		=> "1",
      	);		
-	    if ( $this->cursos_model->savemodulo($data)) {
+	    if($this->cursos_model->savemodulo($data)){
 			redirect(base_url("registro/cursos/modulo/".$curso_id));	
 		} 
 	}
 
 	public function updatemodulo($id,$modulo,$abre,$curso_id){
 		$data  = array(
-         	'descripcion' => $modulo,
-		 	'abreviatura' => $abre,
-         	'curso_id' =>  $curso_id,
+         	'descripcion' 	=> $modulo,
+		 	'abreviatura' 	=> $abre,
+         	'curso_id' 		=> $curso_id,
      	);		
 	    if ( $this->cursos_model->updatemodulo($id,$data)) {
 			redirect(base_url("registro/cursos/modulo/".$curso_id));	
@@ -152,16 +123,16 @@ class cursos extends CI_Controller {
 	}
 
 	public function insertsubmodulo(){
-		$curso_id = $this->input->post("curso_id");
-		$idusuario = $this->session->userdata("id");
-		$data  = array(
-			'modulo_id' => $this->input->post("modulo_id"),
-			'descripcion' => $this->input->post("submodulo"),
-			'horas' => $this->input->post("horas"),
-			'costo' => $this->input->post("costo"),
-			'usu_reg' =>$idusuario,
-			'fec_reg' => date('Y-m-d'),
-			'estado' => "1",
+		$curso_id 	= $this->input->post("curso_id");
+		$idusuario 	= $this->session->userdata("id");
+		$data  		= array(
+			'modulo_id' 	=> $this->input->post("modulo_id"),
+			'descripcion' 	=> $this->input->post("submodulo"),
+			'horas' 		=> $this->input->post("horas"),
+			'costo' 		=> $this->input->post("costo"),
+			'usu_reg' 		=> $idusuario,
+			'fec_reg' 		=> date('Y-m-d'),
+			'estado' 		=> "1",
 		);		
 		if ( $this->cursos_model->savesubmodulo($data)) {
 			redirect(base_url("registro/cursos/modulo/".$curso_id));	
@@ -171,16 +142,14 @@ class cursos extends CI_Controller {
 	public function deletesubmodulo($id,$curso_id){
 		if ( $this->cursos_model->eliminarsubmodulo($id)) {
 			redirect(base_url("registro/cursos/modulo/".$curso_id));
-			
 		} 
 	}	 
 
 	public function actualizarmodulos(){
-		$curso_id = $this->input->post("curso_id");
-		// modulo//
-		$idmodulo = $this->input->post("idmodulo");
-		$nombremodulo = $this->input->post("nombremodulo");
-		$abreviaturamodulo = $this->input->post("abreviaturamodulo");
+		$curso_id 			= $this->input->post("curso_id");
+		$idmodulo 			= $this->input->post("idmodulo");
+		$nombremodulo 		= $this->input->post("nombremodulo");
+		$abreviaturamodulo 	= $this->input->post("abreviaturamodulo");
 		for ($i=0; $i < count($idmodulo); $i++) { 
 			$dato = $idmodulo[$i];
 			$data  = array(
@@ -190,7 +159,6 @@ class cursos extends CI_Controller {
 			$this->cursos_model->updatemodulo($dato,$data);
 		}
 
-		// submodulo
 		$idsubmodulo = $this->input->post("idsubmodulo");
 		$nombresubmodulo = $this->input->post("nombresubmodulo");
 		$horasubmodulo = $this->input->post("horasubmodulo");

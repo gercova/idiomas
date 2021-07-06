@@ -3,10 +3,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>
-        PAGOS
-        <small>Nuevo</small>
-        </h1>
+        <h1>PAGOS <small>Nuevo</small></h1>
     </section>
     <!-- Main content -->
     <section class="content">
@@ -18,8 +15,8 @@
                         <?php if($this->session->flashdata("error")):?>
                             <div class="alert alert-danger alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <p><i class="icon fa fa-ban"></i><?php echo $this->session->flashdata("error"); ?></p>
-                             </div>
+                                <p><i class="icon fa fa-ban"></i><?php echo $this->session->flashdata("error");?></p>
+                            </div>
                         <?php endif;?>
                         <form class="form-horizontal" action="<?php echo base_url('movimientos/pagos/store');?>" method="POST">
                             <div class="form-group">
@@ -32,13 +29,13 @@
                                         <input type="text" class="form-control" id="dni-estudiante" readonly>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" placeholder="BUSCAR ESTUDIANTE" readonly name="estudiante" id="estudiante" readonly data-toggle="modal" data-target="#modal-prematricula" required>
+                                        <input type="text" class="form-control" placeholder="BUSCAR ESTUDIANTE" readonly name="estudiante" id="estudiante" data-toggle="modal" data-target="#modal-prematricula"  readonly required>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control"  readonly  class="form-control" readonly name="curso" id="curso" >
+                                        <input type="text" class="form-control" readonly class="form-control" readonly name="curso" id="curso" value="<?php echo set_value('nota');?>">
                                     </div>
                                     <div class="col-md-1">
-                                        <input type="text" style="color:red;text-align:center" class="form-control" name="deuda" id="deuda" >
+                                        <input type="text" style="color:red;text-align:center" class="form-control" name="deuda" id="deuda" value="<?php echo set_value('nota');?>">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -51,7 +48,7 @@
                                 </div>
                                 <div class="col-md-5">
                                     <label for="descripcion">DESCRIPCIÓN DEL PAGO:</label>
-                                    <input type="text" class="form-control" name="nota" id="nota" required>
+                                    <input type="text" class="form-control" name="nota" id="nota" value="<?php echo set_value('nota');?>" required>
                                 </div>
                             </div>
                             <div class="form-group">

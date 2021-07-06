@@ -8,7 +8,7 @@
         overflow    : scroll,
         sorting     : true,
         actions: {
-            listAction: '<?php echo site_url("prematriculas/aperturas/list"); ?>',
+            listAction: '<?php echo site_url("movimientos/pagos/list"); ?>',
         },
             
         toolbar: {
@@ -129,13 +129,13 @@
     LoadRecordsButton.click(function (e) {
         e.preventDefault();
         console.log($('#search').val())
-        $('#aperturas').jtable('load', {
+        $('#pagos').jtable('load', {
             search: $('#search').val()
         });
     });
     
     LoadRecordsButton.click();
     const newRecord = () => {
-        window.location.href = "<?php echo site_url();?>movimientos/pagos/add";
+        window.location.href = "<?php echo site_url('movimientos/pagos/add');?>";
     }
 </script>
