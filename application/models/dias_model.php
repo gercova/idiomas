@@ -23,7 +23,7 @@ class Dias_model extends CI_Model {
 	}
 
 	public function getedit($id){
-		// cargar datos docente aula fechas del mantenimiento add prematricula
+		# cargar datos docente aula fechas del mantenimiento add prematricula
 		$resultado = $this->db->select("*")
 			->from("dias")
 			->where("id",$id)

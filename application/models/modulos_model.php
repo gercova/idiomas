@@ -3,10 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class modulos_model extends CI_Model {
 	public function grilla($starIndex, $pageSize, $buscar){
-		$cont=$this->db
-		->where("estado", '1')
-		->where("descripcion", $buscar)
-		->from('modulos')->count_all_results(); 
+		$cont = $this->db->where("estado", '1')->where("descripcion", $buscar)->from('modulos')->count_all_results(); 
 		$this->db->select("c.id as cuid, m.id, n.descripcion as nivel, ci.descripcion as ciclo, c.descripcion as curso,m.descripcion as modulo");
 		$this->db->from("modulos as m");
 		$this->db->join("cursos as c", "m.curso_id = c.id");
@@ -28,16 +25,15 @@ class modulos_model extends CI_Model {
 		return $this->db->update("modulos",$data);
 	}
 
-	public function getedit($id) /// cargar datos docente aula fechas del mantenimiento add prematricula
-	{
-		$this->db->select("c.id,ci.descripcion as ciclo, n.descripcion as nivel, c.descripcion");
-		$this->db->from("cursos as c");
-		$this->db->join("ciclos as ci", "ci.id = c.ciclo_id");
-		$this->db->join("niveles as n", "n.id = c.nivel_id");
-		$this->db->or_where("c.estado =1 AND ci.estado=1 AND n.estado=1");
-		$this->db->where("c.id",$id);
-		//$this->db->where("estado","1");
-		$resultado = $this->db->get();
+	public function getedit($id){
+		# cargar datos docente aula fechas del mantenimiento add prematricula
+		$resultado = $this->db->select("c.id,ci.descripcion as ciclo, n.descripcion as nivel, c.descripcion")
+			->from("cursos as c")
+			->join("ciclos as ci", "ci.id = c.ciclo_id")
+			->join("niveles as n", "n.id = c.nivel_id")
+			->or_where("c.estado =1 AND ci.estado=1 AND n.estado=1")
+			->where("c.id",$id)
+			->get();
 		if ($resultado->num_rows() > 0) {
 			echo json_encode($resultado->result()[0]);
 		} else {
@@ -46,18 +42,16 @@ class modulos_model extends CI_Model {
 	}
 
 	public function getmodulos($id){
-		$this->db->select("m.id,m.descripcion,m.abreviatura");
-		$this->db->from("modulos as m");
-		$this->db->join("cursos as c", "c.id = m.curso_id");
-		$this->db->where("c.estado = 1 AND m.estado = 1");
-		$this->db->where("c.id",$id);
-		$resultados = $this->db->get();
+		$resultados = $this->db->select("m.id,m.descripcion,m.abreviatura")
+			->from("modulos as m")
+			->join("cursos as c", "c.id = m.curso_id")
+			->where("c.estado = 1 AND m.estado = 1")
+			->where("c.id",$id)
+			->get();
 		if ($resultados->num_rows() > 0) {
 			return $resultados->result();
 		} else {
 			return false;
 		}
 	}
-
-
 }

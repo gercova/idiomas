@@ -27,13 +27,13 @@ class niveles_model extends CI_Model {
 		return $this->db->update("niveles",$data);
 	}
 
-	public function getedit($id) /// cargar datos docente aula fechas del mantenimiento add prematricula
-	{
-		$this->db->select("*");
-		$this->db->from("niveles");
-		$this->db->where("id",$id);
-		$this->db->where("estado","1");
-		$resultado = $this->db->get();
+	public function getedit($id){
+		# cargar datos docente aula fechas del mantenimiento add prematricula
+		$resultado = $this->db->select("*")
+			->from("niveles")
+			->where("id",$id)
+			->where("estado","1")
+			->get();
 		if ($resultado->num_rows() > 0) {
 			echo json_encode($resultado->result()[0]);
 		} else {

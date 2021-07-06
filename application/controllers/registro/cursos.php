@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
 class cursos extends CI_Controller {
+	
 	private $permisos; /* crear para permisos de modulos  */
 	public function __construct(){	
 		parent::__construct();

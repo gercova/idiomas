@@ -31,7 +31,7 @@ $menus = array(
                         array('link'=>'prematriculas/aperturas', 'nombre'=> 'Aperturar Curso'), 
                         array('link'=>'prematriculas/prematriculas', 'nombre'=> 'Registrar Prematricula')
                 )),
-                array('id_padre'=>4,'nombre' => 'Pagos','icono'=> 'fa-dashboard',
+                array('id_padre'=>4,'nombre' => 'PAGOS','icono'=> 'fa-dashboard',
                 'links' => array( 
                         array('link'=>'movimientos/pagos', 'nombre'=> 'Pago Estudiantes'), 
                         array('link'=>'movimientos/otros', 'nombre'=> 'Pagos Varios')

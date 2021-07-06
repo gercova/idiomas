@@ -51,44 +51,40 @@
 <script src="<?php echo base_url();?>assets/template/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url();?>assets/template/dist/js/demo.js"></script>
-<script src="<?php echo base_url();?>scripts/estudiantes.js"></script>
-<script src="<?php echo base_url();?>scripts/prematriculas.js"></script>
+<script src="<?php echo base_url('scripts/estudiantes.js');?>"></script>
+<script src="<?php echo base_url('scripts/prematriculas.js');?>"></script>
+<script src="<?php echo base_url('scripts/pagos.js');?>"></script>
 <script>
 var base_url= "<?php echo base_url();?>";
 $(document).ready(function () {
-   
     var year = (new Date).getFullYear();
-  //  datagrafico(base_url,year);
-
     $("#year").on("change",function(){
         var yearselect = $(this).val();
 		datagrafico(base_url,yearselect);
-       // datagrafico(base_url,yearselect);
     });
     
     $(".btn-remove").on("click", function(e){
-            e.preventDefault();
-            var ruta = $(this).attr("href");
-            //alert(ruta);
-            $.ajax({
-                url: ruta,
-                type:"POST",
-                success:function(resp){
-                    //http://localhost/ventas_ci/mantenimiento/productos
-                    window.location.href = base_url + resp;
-                }
-            });
+        e.preventDefault();
+        var ruta = $(this).attr("href");
+        $.ajax({
+            url: ruta,
+            type:"POST",
+            success:function(resp){
+                //http://localhost/ventas_ci/mantenimiento/productos
+                window.location.href = base_url + resp;
+            }
         });
+    });
         
     $(".btn-remove-gri").on("click", function(){
         var remover=$(this).val(); 
         var opcion = confirm("Esta Por eliminar registros !! Aceptar o Cancelar");
-    if (opcion == true) {
-                        $.ajax({
-                        url: remover,
-                        type:"POST",
-                    });
-                    location.reload();
+        if (opcion == true) {
+            $.ajax({
+                url: remover,
+                type:"POST",
+            });
+            location.reload();
         } else {
             location.reload();
         }
@@ -97,31 +93,27 @@ $(document).ready(function () {
 	$(".btn-remove-notas").on("click", function(){
         var remover=$(this).val(); 
         var opcion = confirm("Esta todas las notas del registros !! Aceptar o Cancelar");
-    if (opcion == true) {
-                        $.ajax({
-                        url: remover,
-                        type:"POST",
-                    });
-                    location.reload();
+        if (opcion == true) {
+            $.ajax({
+                url: remover,
+                type:"POST",
+            });
+            location.reload();
         } else {
             location.reload();
         }
     });
+    //// CARGAR HORA 
+    $('.time-picker1').timepicker({
+        showMeridian: false     
+    });
 
-//// CARGAR HORA 
-
-$('.time-picker1').timepicker({
-            showMeridian: false     
-        });
-
-$('.time-picker2').timepicker({
-            showMeridian: false     
-        });
-//// FIN HORA
-
-// ALGUNAS VISTAS ANTERIORES 
-
-      $(".btn-view-usuario").on("click", function(){
+    $('.time-picker2').timepicker({
+        showMeridian: false     
+    });
+    //// FIN HORA
+    // ALGUNAS VISTAS ANTERIORES 
+    $(".btn-view-usuario").on("click", function(){
         var id = $(this).val();
         $.ajax({
             url: base_url + "administrador/usuarios/view",
@@ -131,12 +123,9 @@ $('.time-picker2').timepicker({
                 $("#modal-default .modal-body").html(resp);
                 //alert(resp);
             }
-
         });
-
     });
-
- // TABLAS DENTRO DE LOS MANTENIMIENTOS 
+    // TABLAS DENTRO DE LOS MANTENIMIENTOS 
     $('.tablas').DataTable( {
         dom: 'Bfrtip',
         buttons: [
@@ -331,9 +320,6 @@ $('.time-picker2').timepicker({
         $("#modal-estudiante").modal("hide");
     });
     /// BUSCAR ESTUDIANTE
-<<<<<<< HEAD
-  
-=======
     $("#btn-buscarestu").on("click", function(event) {             
         if($("#dni").val()) {
             var uno = $("#dni").val();
@@ -351,7 +337,6 @@ $('.time-picker2').timepicker({
             alert("Ingrese DNI/RUC del Estudiante");
         }
     });
->>>>>>> 99496fdacf299b55b5afafc198ae45741a2cbbc3
     /// seleccionar el nivel academico en el formulario prematricula 
     $(document).on("click",".btn-nivelpre",function(){
         nivel = $(this).val();
@@ -362,9 +347,6 @@ $('.time-picker2').timepicker({
         $("#modal-nivel").modal("hide");
     });
     /// seleccionar apertura de cursos en formulario prematricula
-<<<<<<< HEAD
-
-=======
     $(document).on("click",".btn-apertura",function(){
         apertura = $(this).val();
         infoapertura = apertura.split("*");
@@ -374,7 +356,6 @@ $('.time-picker2').timepicker({
         $("#curso").val(infoapertura[6]);
         $("#modal-apertura").modal("hide");
     });
->>>>>>> 99496fdacf299b55b5afafc198ae45741a2cbbc3
     /// calcular el pago del alumno por curso
     $("#btn-calcular-pago").on("click",function(){
         data = $("#costo").val()+ "*"+$("#porcentaje").val()+ "*"+$("#descuento").val();
@@ -392,55 +373,6 @@ $('.time-picker2').timepicker({
         conpre= conpre -1;
         $("#conpre").val(conpre);
         $(this).closest("tr").remove();
-    });
-    //FORMULRIO PAGOS 
-    /// DATOS DEL ALUMNO FORMULARIO PAGOS
-    $(document).on("click",".btn-pagos",function(){
-        grupo = $(this).val();
-        infogrupo = grupo.split("*");
-        $("#idprematricula").val(infogrupo[0]);
-        $("#dniestudiante").val(infogrupo[1]);
-        $("#estudiante").val(infogrupo[2]);
-        $("#curso").val(infogrupo[3]+" - "+infogrupo[4]);
-        $("#deuda").val(infogrupo[5]);
-        $("#descripcion").val("CTITPT");
-        $("#modal-prematricula").modal("hide");
-    });
-//AGREGA PAGOS A LA TABLA DEL FORMULARIO DE PAGOS
-    $("#btn-agregar-pago").on("click",function(){
-        var con=0;
-        if ($("#descripcion").val() !='' &&  $("#monto").val() !='' &&  $("#codigo").val() !='' &&  $("#fecha_pago").val() !='') {
-            data =$("#idprematricula").val()+"*"+$("#dniestudiante").val()+"*"+$("#estudiante").val()+"*"+$("#descripcion").val()+ "*"+$("#monto").val()+ "*"+$("#codigo").val()+ "*"+$("#fecha_pago").val()+ "*"+$("#deuda").val();
-            infopago = data.split("*");
-            con=con+1;
-            html = "<tr>";
-            html += "<td><input type='hidden' class='form-control' name='idpre[]' value='"+infopago[0]+"'><input type='text' size='5%' readonly style='text-align:right' class='form-control' name='dni[]' value='"+infopago[1]+"'></td>";    
-            html += "<td><input type='hidden' class='form-control' name='deudas[]' value='"+infopago[7]+"'><input type='text' size='30%' readonly class='form-control' name='estudiante[]' value='"+infopago[2]+"'></td>";
-            html += "<td><input type='text' size='5%' style='text-align:right' class='form-control' name='descripcionpago[]' value='"+infopago[3]+"'></td>";
-            html += "<td><input type='text' size='5%' style='text-align:right' class='form-control' name='montopago[]' value='"+infopago[4]+"'></td>";
-            html += "<td><input type='text' size='5%' style='text-align:right' class='form-control' name='codigopago[]' value='"+infopago[5]+"'></td>";
-            html += "<td><input type='date' size='10%' style='color:red;text-align:right' class='form-control' name='fechapago[]' value='"+infopago[6]+"'></td>";
-            html += "<td><button type='button' class='btn btn-danger btn-remove-pago'><span class='fa fa-remove'></span></button></td>";
-            html += "</tr>";
-            $("#tbpagos tbody").append(html);
-            $("#contador").val(con);
-            $("#idprematricula").val(null);
-            $("#dniestudiante").val(null);
-            $("#estudiante").val(null);
-            $("#curso").val(null);
-            $("#deuda").val(null);
-            $("#descripcion").val(null);
-            $("#monto").val(null);
-            $("#codigo").val(null);
-            $("#fecha_pago").val(null);
-        }else{
-            alert("Ingrese datos del Boucher...");
-        }
-    });
-    /// remober pago 
-    $(document).on("click",".btn-remove-pago", function(){
-        $(this).closest("tr").remove();
-        sumar();
     });
     //FORMULRIO PAGOS VARIOS
     /// DATOS DEL ALUMNO FORMULARIO PAGOS
@@ -500,7 +432,7 @@ $('.time-picker2').timepicker({
     });
     //// INICIAR CURSO - MATRICULAR ALUMNOS
     /// seleccionar apertura de cursos en formulario iniciar curso
-        $(document).on("click",".btn-inicurso",function(){
+    $(document).on("click",".btn-inicurso",function(){
         apertura = $(this).val();
         infoapertura = apertura.split("*");
         $("#idapertura").val(infoapertura[0]);
@@ -630,113 +562,91 @@ $('.time-picker2').timepicker({
     });
     /// cargar notas  add notas
     $("#btn-agregar-notas").on("click", function(event) {
-         if($("#idapertura").val() !='' && $("#idcurso").val() !='') {
-         var uno = $("#idapertura").val();
-		 var dos = $("#idcurso").val();
-               $.ajax({
-                     url: base_url + "matriculas/notas/buscaralumno",
-                     method: "POST",
-                   //  data:{idcurso:uno,idgrupo:dos,fecha_ini:tres,fecha_fin:cuatro,iddocente:cinco,idaula:seis},
-				   data:{idapertura:uno,idcurso:dos},
-                     dataType: "json"
-               })
-                 .done(function(result) {
-                  // console.log(result);
-                   $('#modules_len').val(result.modulos.leng);
-                   $('#modules_ids').val(JSON.stringify(result.modulos.modulodata));
-                   tablenotas.clear().draw();
-                   tablenotas.rows.add(result.alumnos).draw();
-                 })
-                 .fail(function(jqXHR, textStatus, errorThrown) {
-                   // needs to implement if it fails
-                 });
+        if($("#idapertura").val() !='' && $("#idcurso").val() !='') {
+            var uno = $("#idapertura").val();
+		    var dos = $("#idcurso").val();
+            $.ajax({
+                url: base_url + "matriculas/notas/buscaralumno",
+                method: "POST",
+				data:{idapertura:uno,idcurso:dos},
+                dataType: "json"
+            }).done(function(result) {
+                // console.log(result);
+                $('#modules_len').val(result.modulos.leng);
+                $('#modules_ids').val(JSON.stringify(result.modulos.modulodata));
+                tablenotas.clear().draw();
+                tablenotas.rows.add(result.alumnos).draw();
+            }).fail(function(jqXHR, textStatus, errorThrown) {});
 
-         }else{
-                 alert("Ingrese todos los datos del formulario");
-             }
-     });
-
-     /// cargar notas  add notas en las modicficaciones
+        }else{
+            alert("Ingrese todos los datos del formulario");
+        }
+    });
+    /// cargar notas  add notas en las modicficaciones
     $("#btn-agregar-notasmod").on("click", function(event) {
-         if($("#idapertura").val() !='' && $("#idcurso").val() !='') {
-         var uno = $("#idapertura").val();
-		 var dos = $("#idcurso").val();
-               $.ajax({
-                     url: base_url + "matriculas/notas/buscaralumnomod",
-                     method: "POST",
-                   //  data:{idcurso:uno,idgrupo:dos,fecha_ini:tres,fecha_fin:cuatro,iddocente:cinco,idaula:seis},
-				   data:{idapertura:uno,idcurso:dos},
-                     dataType: "json"
-               })
-                 .done(function(result) {
-                  // console.log(result);
-                   $('#modules_len').val(result.modulos.leng);
-                   $('#modules_ids').val(JSON.stringify(result.modulos.modulodata));
-                   tablenotas.clear().draw();
-                   tablenotas.rows.add(result.alumnos).draw();
-                 })
-                 .fail(function(jqXHR, textStatus, errorThrown) {
-                   // needs to implement if it fails
-                 });
+        if($("#idapertura").val() !='' && $("#idcurso").val() !='') {
+            var uno = $("#idapertura").val();
+		    var dos = $("#idcurso").val();
+            $.ajax({
+                url: base_url + "matriculas/notas/buscaralumnomod",
+                method: "POST",
+				data:{idapertura:uno,idcurso:dos},
+                dataType: "json"
+            }).done(function(result) {
+                // console.log(result);
+                $('#modules_len').val(result.modulos.leng);
+                $('#modules_ids').val(JSON.stringify(result.modulos.modulodata));
+                tablenotas.clear().draw();
+                tablenotas.rows.add(result.alumnos).draw();
+            }).fail(function(jqXHR, textStatus, errorThrown) {});
 
-         }else{
-                 alert("Ingrese todos los datos del formulario");
-             }
-     });
-
+        }else{
+            alert("Ingrese todos los datos del formulario");
+        }
+    });
     /// vista de agregar notas 
-		let tablenotas = $("#table_notas").DataTable({
-          columns: [
-              { data: "dni" },
-              { data: "nombre" },
-            //  { data: "apellido" },
-              { data: "idpre",
-                 render: function (data_idpre) { 
-                     //console.log("modules tamano", $('#modules_len').val());
-                     let monleng=$('#modules_len').val();
-                     let mod_ids=JSON.parse($('#modules_ids').val());
-                     let stringinput = '';
-                    let srtConcat = '';
-					let title_m = '';
-					let hola = 1;
-                     for (let mod of mod_ids){
-						//console.log("TCL: mod_ids", mod.id);
-					//	$('#modules_ids').data('mod_id')
-                        stringinput=`<input type='hidden' name='idprematricula[]' value='${data_idpre}'>
-									 <input type='hidden' name='idmodulo[]' value='${mod.id}'>
-									<input id='${mod.id}' title='${mod.nombre}' name='nota[${data_idpre}][${mod.id}]' value='' data-mod_id='${mod.id}' style='width:42px;border:1px solid gray; border-radius:4px; margin-right: 3px' type='number' min='0' max='20' />`; 
-						let coma = ''
-						if(title_m != ''){
-							coma = ',';
-						}
-						title_m = `${title_m}${coma} ${mod.abreviatura}`;
-						$('#title_mods').text(title_m);
-						srtConcat=srtConcat + stringinput;
-						hola=hola+1;
-                     }
-
-                    // for(var i=0;i<monleng;i++){
-                    //  };
-                     return srtConcat;
+    let tablenotas = $("#table_notas").DataTable({
+        columns: [
+            { data: "dni" },
+            { data: "nombre" },
+            { data: "idpre",
+            render: function (data_idpre) { 
+                let monleng=$('#modules_len').val();
+                let mod_ids=JSON.parse($('#modules_ids').val());
+                let stringinput = '';
+                let srtConcat = '';
+				let title_m = '';
+				let hola = 1;
+                for(let mod of mod_ids){
+                    stringinput=`<input type='hidden' name='idprematricula[]' value='${data_idpre}'><input type='hidden' name='idmodulo[]' value='${mod.id}'><input id='${mod.id}' title='${mod.nombre}' name='nota[${data_idpre}][${mod.id}]' value='' data-mod_id='${mod.id}' style='width:42px;border:1px solid gray; border-radius:4px; margin-right: 3px' type='number' min='0' max='20' />`; 
+					let coma = '';
+					if(title_m != ''){
+						coma = ',';
+					}
+					title_m = `${title_m}${coma} ${mod.abreviatura}`;
+					$('#title_mods').text(title_m);
+					srtConcat=srtConcat + stringinput;
+					hola=hola+1;
+                }
+                return srtConcat;
 			}, width: 300},
 		
-		   ],
-		   	columnDefs: [
-           		 { "width": "20%", "targets": 0 }
-			],
+		],
+		columnDefs: [
+           	{ "width": "20%", "targets": 0 }
+		],
 
-          rowCallback: function(row, data) {},
-          filter: true,
-          info: true,
-          ordering: true,
-          processing: true,
-          retrieve: true,
-          paging:   false,
-		});
-
-/// FORMULARIO CERTIFICADOS   /////
-/// seleccionar el estudiates en el formulario prematricula 
- $(document).on("click",".btn-aludura",function(){
+        rowCallback: function(row, data) {},
+        filter: true,
+        info: true,
+        ordering: true,
+        processing: true,
+        retrieve: true,
+        paging:   false,
+	});
+    /// FORMULARIO CERTIFICADOS   /////
+    /// seleccionar el estudiates en el formulario prematricula 
+    $(document).on("click",".btn-aludura",function(){
         alumno = $(this).val();
         infoalumno = alumno.split("*");
         $("#idprematricula").val(infoalumno[0]);
@@ -746,11 +656,11 @@ $('.time-picker2').timepicker({
         $("#fecha_fin").val(infoalumno[5]);
         $("#modal-alumnos").modal("hide");
     });
-//var cuenfo=Integer.parseInt("1");
-var cuenfo=1;
-// agregar certificado  
-$("#btn-agregar-certificado").on("click",function(){
-            if ($("#idprematricula").val() !='' &&  $("#alumno").val() !='' &&  $("#fecha_ini").val() !='' &&   $("#fecha_fin").val() !='' && $("#curso").val() !='' &&  $("#folio").val() !='' &&  $("#correlativo").val() !='' &&  $("#fecha").val() !='') {
+    //var cuenfo=Integer.parseInt("1");
+    var cuenfo=1;
+    // agregar certificado  
+    $("#btn-agregar-certificado").on("click",function(){
+        if ($("#idprematricula").val() !='' &&  $("#alumno").val() !='' &&  $("#fecha_ini").val() !='' &&   $("#fecha_fin").val() !='' && $("#curso").val() !='' &&  $("#folio").val() !='' &&  $("#correlativo").val() !='' &&  $("#fecha").val() !='') {
             data = $("#idprematricula").val()+"*"+$("#alumno").val()+"*"+$("#fecha_ini").val()+"*"+$("#fecha_fin").val()+ "*"+$("#curso").val()+ "*"+$("#folio").val()+ "*"+$("#correlativo").val()+ "*"+$("#fecha").val()+ "*"+$("#cara").val();
             infocertificado = data.split("*");
             html = "<tr>";
@@ -788,15 +698,12 @@ $("#btn-agregar-certificado").on("click",function(){
             $("#fecha").val(null);
         }
     });
-/// remober datos del certificados 
-$(document).on("click",".btn-remove-certificado", function(){
+    /// remober datos del certificados 
+    $(document).on("click",".btn-remove-certificado", function(){
         $(this).closest("tr").remove();
-       // sumar();
     });
-
-//// FORMULARIO DUPLICADO 
-
-$(document).on("click",".btn-certificado",function(){
+    //// FORMULARIO DUPLICADO 
+    $(document).on("click",".btn-certificado",function(){
         alumno = $(this).val();
         infoalumno = alumno.split("*");
         $("#idprematricula").val(infoalumno[0]);
@@ -806,9 +713,8 @@ $(document).on("click",".btn-certificado",function(){
         $("#correlativo").val(infoalumno[4]);
         $("#modal-duplicados").modal("hide");
     });
-
-$("#btn-agregar-duplicado").on("click",function(){
-               if ($("#idprematricula").val() !='' &&  $("#alumno").val() !='' &&  $("#curso").val() !='' &&  $("#folio").val() !='' &&  $("#correlativo").val() !='' &&  $("#fecha").val() !='') {
+    $("#btn-agregar-duplicado").on("click",function(){
+        if($("#idprematricula").val() !='' &&  $("#alumno").val() !='' &&  $("#curso").val() !='' &&  $("#folio").val() !='' &&  $("#correlativo").val() !='' &&  $("#fecha").val() !=''){
             data = $("#idprematricula").val()+"*"+$("#alumno").val()+ "*"+$("#curso").val()+ "*"+$("#folio").val()+ "*"+$("#correlativo").val()+ "*"+$("#fecha").val();
             infocertificado = data.split("*");
             html = "<tr>";
@@ -831,30 +737,22 @@ $("#btn-agregar-duplicado").on("click",function(){
             alert("Ingrese datos del datos para generar el certificado Duplicado...");
         }
     });
-
-
-///IMPRIMIR LISTAS DEL SISTEMA
-/// imprimir lista de alumnos matriculados
+    ///IMPRIMIR LISTAS DEL SISTEMA
+    /// imprimir lista de alumnos matriculados
     $(document).on("click",".btn-print",function(){
         $("#modal-matriculados .modal-body").print({
-
             title:"Lista de Alumnos Matriculados"
         });
     });
-/// imprimir acta de notas
+    /// imprimir acta de notas
     $(document).on("click",".btn-print-notas",function(){
         $("#modal-notas .modal-body").print({
             title:"REGISTRO DE NOTAS"
         });
     });
 })
-
-
 ///// APIIII   DNI RENIEC Y SUNAT
-
-
 ///// GRAFICAS Y REPORTES GRAFICOS DE INGRESOS
-
 function datagrafico(base_url,year){
     namesMonth=["ENE", "FEB", "MAR", "ABR", "MAY", "JUN","JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
     $.ajax({

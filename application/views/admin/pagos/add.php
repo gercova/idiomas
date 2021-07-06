@@ -21,72 +21,59 @@
                                 <p><i class="icon fa fa-ban"></i><?php echo $this->session->flashdata("error"); ?></p>
                              </div>
                         <?php endif;?>
-                        <form action="<?php echo base_url();?>movimientos/pagos/store" method="POST" class="form-horizontal">
-
-                            <div class="form-group <?php echo form_error('prematricula') == true ? 'has-error':''?>">
-                                <label class="col-md-12" for="">Estudiante Prematriculado: </label>
-                                    <div class="input-group col-md-12">
-                                        <div class="col-md-2">   
-                                            <input type="hidden" name="idprematricula" id="idprematricula" value="">
-                                            <input type="text" class="form-control" readonly  name="dniestudiante" id="dniestudiante" >
-                                        </div>
-                                        <div class="col-md-3">
-                                             <input type="text" class="form-control" placeholder="Seleccione estudiante" readonly name="estudiante" id="estudiante"  readonly data-toggle="modal" data-target="#modal-prematricula">
-                                        </div>
-                                        <div class="col-md-4">
-                                             <input type="text" class="form-control"  readonly  class="form-control" readonly name="curso" id="curso" >
-                                        </div>
-                                        <div class="col-md-1">
-                                            <input type="text"  style="color:red;text-align:center" readonly  class="form-control"  name="deuda" id="deuda" >
-                                        </div>
-                                    </div><!-- /input-group -->
-                                <?php echo form_error("prematricula","<span class='help-block'>","</span>");?>
-                            </div> 
-                     
+                        <form class="form-horizontal" action="<?php echo base_url('movimientos/pagos/store');?>" method="POST">
                             <div class="form-group">
-                                <div class="col-md-2">
-                                    <label for="">REFERENCIA VOUCHER:</label>
-                                    <input type="text" class="form-control" id="descripcion" >
+                                <label class="col-md-12" for="">ESTUDIANTE PREMATRICULADO:</label>
+                                <div class="input-group col-md-12">
+                                    <div class="col-md-2">  
+                                        <input type="hidden" name="idapertura" id="idapertura" value="">
+                                        <input type="hidden" name="idmatricula" id="idmatricula" value="">
+                                        <input type="hidden" name="idestudiante" id="idestudiante" value="">
+                                        <input type="text" class="form-control" id="dni-estudiante" readonly>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" placeholder="BUSCAR ESTUDIANTE" readonly name="estudiante" id="estudiante" readonly data-toggle="modal" data-target="#modal-prematricula" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control"  readonly  class="form-control" readonly name="curso" id="curso" >
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="text" style="color:red;text-align:center" readonly  class="form-control"  name="deuda" id="deuda" >
+                                    </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <label for="">MONTO:</label>
-                                    <input type="text" class="form-control" id="monto" >
+                                <div class="col-md-3">
+                                    <label for="concepto">CONCEPTO:</label>
+                                    <select class="form-control" name="concepto" id="concepto">
+                                        <?php foreach($concepto as $c):?>
+                                            <option value="<?php echo $c->id;?>"><?php echo $c->descripcion;?></option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
-                                <div class="col-md-2">
-                                    <label for="">CODIGO VOUCHER:</label>
-                                    <input type="text" class="form-control" id="codigo" >
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="">FECHA PAGO:</label>
-                                    <input type="date" class="form-control" id="fecha_pago" >
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="">&nbsp;</label>
-                                    <button id="btn-agregar-pago" type="button" class="btn btn-success btn-flat btn-block"><span class="fa fa-plus"></span> Agregar</button>
+                                <div class="col-md-5">
+                                    <label for="descripcion">DESCRIPCIÓN DEL PAGO:</label>
+                                    <input type="text" class="form-control" name="descripcion" id="descripcion" required>
                                 </div>
                             </div>
-                            <table id="tbpagos" class="table table-bordered table-striped table-hover">
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-primary btn-add-info-payment">Agregar vaucher de pago</button>
+                                </div>
+                            </div>
+                            <table id="tb-payment" class="table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th style='text-align:center'>DNI</th>
-                                        <th style='text-align:center'>ESTUDIANTE</th>
-                                        <th style='text-align:center'>REFERENCIA VOUCHER</th>
+                                        <th style='text-align:center'>CODIGO VAUCHER</th>
                                         <th style='text-align:center'>MONTO</th>
-                                        <th style='text-align:center'>CODIGO VOUCHER</th>
                                         <th style='text-align:center'>FECHA PAGO</th>
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                
-                                </tbody>
+                                <tbody></tbody>
                             </table>
-                            <input type="hidden" name="contador" id="contador" value=""> 
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-success btn-flat">Guardar</button>
-                                </div>
-                                
+                                    <button type="submit" class="btn btn-success pull-right">Guardar</button>
+                                </div> 
                             </div>
                         </form>
                     </div>
@@ -99,8 +86,6 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
-
 <div class="modal fade bd-example-modal-lg" id="modal-prematricula">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -112,31 +97,29 @@
             <div class="modal-body">
                 <table id="example5" class="table table-bordered table-striped table-hover">
                     <thead>
-                         <tr>
+                        <tr>
+                            <th>#</th>
                             <th>DNI</th>
                             <th>ESTUDIANTE</th>
-                            <!-- <th>Apellido</th> -->
                             <th>CURSO</th>
                             <th>DEUDA</th>
                             <th>OPCIÓN</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if(!empty($prematriculas)):?>
-                                    <?php foreach($prematriculas as $prematricula):?>
-                                        <tr>
-                                            <td><?php $prematricula->id;echo $prematricula->dni;?></td>
-                                            <td><?php echo $prematricula->nombre;?></td>
-                                          
-                                            <td><?php echo $prematricula->curso;?> - <?php echo $prematricula->ape;?></td>
-                                            <td><?php echo $prematricula->deuda;?></td>
-                                             <?php $dataprematricula = $prematricula->id."*".$prematricula->dni."*".$prematricula->nombre."*".$prematricula->ape."*".$prematricula->curso."*".$prematricula->deuda;?>
-                                            <td>
-                                        <button type="button" class="btn btn-success btn-pagos" value="<?php echo $dataprematricula;?>"><span class="fa fa-check"></span></button>
-                                    </td>
-                                </tr>
-                            <?php endforeach;?>
-                        <?php endif;?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($estudiantes as $e):?>
+                            <tr>
+                                <td><?php echo $e->matricula;?></td>
+                                <td><?php echo $e->dni;?></td>
+                                <td><?php echo $e->nombre;?></td>
+                                <td><?php echo $e->curso_nivel;?></td>
+                                <td><?php echo $e->deuda;?></td>
+                                <?php $datapago = $e->apertura."*".$e->matricula."*".$e->estudiante."*".$e->dni."*".$e->nombre."*".$e->curso_nivel."*".$e->deuda;?>
+                                <td>
+                                    <button type="button" class="btn btn-success btn-pagos" value="<?php echo $datapago;?>"><span class="fa fa-check"></span></button>
+                                </td>
+                            </tr>
+                        <?php endforeach;?>
                     </tbody>
                 </table>
             </div>

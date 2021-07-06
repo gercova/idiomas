@@ -1,6 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Conceptos_model extends CI_Model {
+class conceptos_model extends CI_Model {
+
+	public function getconceptos(){
+		$query = $this->db->get('conceptos');
+		return $query->result();
+	}
 
 	public function grilla($starIndex, $pageSize, $buscar){
 		$cont=$this->db->count_all_results('conceptos'); 

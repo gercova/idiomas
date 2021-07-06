@@ -4,36 +4,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class usuarios_model extends CI_Model {
 
 	public function getUsuarios(){
-		
-		$this->db->select("u.*,r.nombre as rol");
-		$this->db->from("usuarios u");
-		$this->db->join("roles r","u.rol_id = r.id");
-		$this->db->where("u.estado","1");
-		$resultados = $this->db->get();
+		$resultados = $this->db->select("u.*,r.nombre as rol")
+			->from("usuarios u")
+			->join("roles r","u.rol_id = r.id")
+			->where("u.estado","1")
+			->get();
 		return $resultados->result();
 	}
 
 	public function getUsuario($id){
-
-		$this->db->select("u.*,r.nombre as rol");
-		$this->db->from("usuarios u");
-		$this->db->join("roles r","u.rol_id = r.id");
-		$this->db->where("u.id",$id);
-		$this->db->where("u.estado","1");
-		$resultado = $this->db->get();
+		$resultado = $this->db->select("u.*,r.nombre as rol")
+			->from("usuarios u")
+			->join("roles r","u.rol_id = r.id")
+			->where("u.id",$id)
+			->where("u.estado","1")
+			->get();
 		return $resultado->row();
 	}
-
 
 	public function getRoles(){
 		$resultados = $this->db->get("roles");
 		return $resultados->result();
 	}
+
 	public function save($data){
 		return $this->db->insert("usuarios",$data);
 	}
-
-
 
 	public function login($username, $password){
 		$this->db->where("username", $username);
@@ -47,7 +43,6 @@ class usuarios_model extends CI_Model {
 			return false;
 		}
 	}
-
 
 	public function update($id,$data){
 		$this->db->where("id",$id);

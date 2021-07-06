@@ -26,7 +26,6 @@
 	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
 <div class="modal fade" id="modal-pagos">
 	<div class="modal-dialog">
 		<div class="modal-content">

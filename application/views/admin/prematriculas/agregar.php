@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="col-lg-8">                        
                                     <label for="dni" class="labelfor" > ESTUDIANTE:</label>
-                                    <input type="text" class="medianos" id="estudiante" name="estudiante" disabled  required>   
+                                    <input type="text" class="medianos" id="estudiante" name="estudiante" disabled required>   
                                     <button type="button" class="btn btn-success" data-toggle="modal" readonly data-target="#modal-estudiantes"><span class="fa fa-plus"></span> NUEVO </button>                           
                                 </div>    
                             </div>

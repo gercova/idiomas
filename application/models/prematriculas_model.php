@@ -33,39 +33,35 @@ class prematriculas_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update('matriculas', $data);
     }
-    public function buscarestu($dni)
-	{
-		/** guarda los Modulos */
-		$this->db->select("*");
-		$this->db->from("estudiantes");
-		$this->db->where("dni", $dni);
-	//	$this->db->where("a.id", $id);
-		$resultado = $this->db->get();
+    
+    public function buscarestu($dni){
+		$resultado = $this->db->select("*")
+		    ->from("estudiantes")
+		    ->where("dni", $dni)
+		    ->get();
 		if ($resultado->num_rows() > 0) {
 			echo json_encode($resultado->result()[0]);
 		} else {
 			echo json_encode($resultado->result());
 		}
 	}
-    public function getaperturas()
-	{
-		$this->db->select("a.*,a.id,a.cursos_id,c.descripcion as curso,cl.descripcion as ciclo,n.descripcion as nivel, SUM(s.costo) as costo");
-		$this->db->from("aperturas a");
-		$this->db->join("cursos c", "a.cursos_id = c.id");
-		$this->db->join("ciclos cl", "c.ciclo_id = cl.id");
-		$this->db->join("niveles n", "c.nivel_id = n.id");
-        $this->db->join("modulos m", "m.curso_id = c.id");
-        $this->db->join("submodulos s", "s.modulo_id = m.id");
-		$this->db->where("a.estado", "1");
-        //$this->db->where("a.estado", "1");
-		$this->db->order_by("a.id","DESC");
-		$this->db->group_by("a.id");
-		$resultados = $this->db->get();
+    
+    public function getaperturas(){
+		$resultados = $this->db->select("a.*,a.id,a.cursos_id,c.descripcion as curso,cl.descripcion as ciclo,n.descripcion as nivel, SUM(s.costo) as costo")
+		    ->from("aperturas a")
+		    ->join("cursos c", "a.cursos_id = c.id")
+		    ->join("ciclos cl", "c.ciclo_id = cl.id")
+		    ->join("niveles n", "c.nivel_id = n.id")
+            ->join("modulos m", "m.curso_id = c.id")
+            ->join("submodulos s", "s.modulo_id = m.id")
+		    ->where("a.estado", "1")
+		    ->order_by("a.id","DESC")
+		    ->group_by("a.id")
+		    ->get();
 		if ($resultados->num_rows() > 0) {
 			return $resultados->result();
 		} else {
 			return false;
 		}
 	}
-
 }

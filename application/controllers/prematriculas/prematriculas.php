@@ -32,10 +32,9 @@ class prematriculas extends CI_Controller {
         $this->view_model->render_view('admin/prematriculas/listjt', $data, 'content/c_prematriculas');
     }
 
-
     public function add(){
-      //  $data['cursos'] = $this->cursos_model->getcursos();
         $data['aperturas'] = $this->prematriculas_model->getaperturas();
+        $data['estudiantes'] = $this->estudiantes_model->getestudiantes();
 		$data['tipos'] = $this->tipos_model->gettipos();
 		$data['carreras'] = $this->carreras_model->getcarreras();
 	    $this->view_model->render_view('admin/prematriculas/agregar', $data, $content_route = null);
