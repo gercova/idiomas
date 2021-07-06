@@ -38,7 +38,7 @@
                                         <input type="text" class="form-control"  readonly  class="form-control" readonly name="curso" id="curso" >
                                     </div>
                                     <div class="col-md-1">
-                                        <input type="text" style="color:red;text-align:center" readonly  class="form-control"  name="deuda" id="deuda" >
+                                        <input type="text" style="color:red;text-align:center" class="form-control" name="deuda" id="deuda" >
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="col-md-5">
                                     <label for="descripcion">DESCRIPCIÓN DEL PAGO:</label>
-                                    <input type="text" class="form-control" name="descripcion" id="descripcion" required>
+                                    <input type="text" class="form-control" name="nota" id="nota" required>
                                 </div>
                             </div>
                             <div class="form-group">

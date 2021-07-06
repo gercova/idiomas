@@ -30,12 +30,12 @@ class pagos extends CI_Controller {
 
 
     public function store(){
-        $id                     = $this->input->post('idpago');
         $data['apertura_id']    = $this->input->post('idapertura');
         $data['matricula_id']   = $this->input->post('idmatricula');
         $data['estudiante_id']  = $this->input->post('idestudiante');
         $data['concepto_id']    = $this->input->post('idconcepto');
-        $data['descripcion']    = $this->input->post('descripcion');
+        $data['descripcion']    = $this->input->post('nota');
+        $data['monto']          = $this->input->post('deuda');
         $data['usu_reg']        = $this->session->userdata('id');
         date_default_timezone_set('America/Lima');
         $data['fec_reg']        = date('Y-m-d');
@@ -60,12 +60,12 @@ class pagos extends CI_Controller {
             $data_pay['codigo']     = $codigo_vaucher[$i];
             $data_pay['monto']      = $monto_vaucher[$i];
             $data_pay['fecha']      = $fecha_vaucher[$i];
-
 			$this->pagos_model->save_detalles($data_pay);
-			$id     =  $pago_id;
-			$total = $this->pagos_model->getdeuda($id);
-			$deuda  = $total->monto;
-			$totaldeuda = intval($deuda) - intval($monto_vaucher[$i]);
+
+			$id         = $pago_id;
+			$total      = $this->pagos_model->getdeuda($id);
+			$deuda      = $total->monto;
+			$totaldeuda = $deuda - $monto_vaucher[$i];
 			$this->pagos_model->descontardeuda($id, $totaldeuda);
 		}
 		return;
