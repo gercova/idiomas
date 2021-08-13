@@ -42,11 +42,12 @@ class pagos extends CI_Controller {
 
         $codigo_vaucher         = $this->input->post('codigo');
         $monto_vaucher          = $this->input->post('monto');
+        $detalle_pago           = $this->input->post('detalle');
         $fecha_vaucher          = $this->input->post('fecha');
 
         if($this->pagos_model->save($data)){
             $pago_id = $this->pagos_model->ultimo_id();
-            $this->save_detalle_pago($pago_id, $codigo_vaucher, $monto_vaucher, $fecha_vaucher);
+            $this->save_detalle_pago($pago_id, $codigo_vaucher, $monto_vaucher, $detalle_pago, $fecha_vaucher);
             redirect(base_url('movimientos/pagos'));
         }else{
             $this->session->set_flashdata('error', 'No se pudo guardar la información');
@@ -54,12 +55,13 @@ class pagos extends CI_Controller {
         }
     }
 
-    protected function save_detalle_pago($pago_id, $codigo_vaucher, $monto_vaucher, $fecha_vaucher){
+    protected function save_detalle_pago($pago_id, $codigo_vaucher, $monto_vaucher, $detalle_pago, $fecha_vaucher){
 		for ($i = 0; $i < count($codigo_vaucher); $i++) {
-            $data_pay['pago_id']    = $pago_id;
-            $data_pay['codigo']     = $codigo_vaucher[$i];
-            $data_pay['monto']      = $monto_vaucher[$i];
-            $data_pay['fecha']      = $fecha_vaucher[$i];
+            $data_pay['pago_id']        = $pago_id;
+            $data_pay['codigo']         = $codigo_vaucher[$i];
+            $data_pay['monto']          = $monto_vaucher[$i];
+            $data_pay['detalle_pago']   = $detalle_pago[$i];
+            $data_pay['fecha']          = $fecha_vaucher[$i];
 			$this->pagos_model->save_detalles($data_pay);
 
 			$id         = $pago_id;

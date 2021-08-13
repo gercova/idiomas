@@ -41,8 +41,8 @@ class estudiantes_model extends CI_Model {
 		return $this->db->update("estudiantes",$data);
 	}
 
-	public function getedit($id) /// cargar datos docente aula fechas del mantenimiento add prematricula
-	{
+	public function getedit($id){
+		/// cargar datos docente aula fechas del mantenimiento add prematricula
 		$this->db->select("*");
 		$this->db->from("estudiantes");
 		$this->db->where("id",$id);
@@ -52,6 +52,14 @@ class estudiantes_model extends CI_Model {
 			echo json_encode($resultado->result()[0]);
 		} else {
 			echo json_encode($resultado->result());
+		}
+	}
+
+	public function validar_dni($value){
+		$this->db->where('dni', $value);
+		$resultado = $this->db->get('estudiantes');
+		if($resultado->num_rows() > 0){
+			return true;
 		}
 	}
 }

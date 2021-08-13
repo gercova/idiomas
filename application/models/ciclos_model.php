@@ -12,23 +12,27 @@ class Ciclos_model extends CI_Model {
 		$cont = $this->db->count_all_results('ciclos'); 
 		$this->db->select("a.id, a.descripcion, a.estado");
 		$this->db->from("ciclos as a");
-		$this->db->or_where("a.descripcion LIKE '%$buscar%' AND a.estado=1");
+		$this->db->where('a.estado', '1');
+		$this->db->like('a.descripcion', $buscar, 'both');
 		$this->db->limit($pageSize);
 		$this->db->offset($starIndex);
-		$this->db->order_by('a.id', 'DESC');
+		$this->db->order_by('a.id', 'desc');
 		return [$this->db->get()->result_array(), $cont];
 	} 
 
-	public function save($data){ /** guarda los ciclos */
+	public function save($data){ 
+		# guarda los ciclos
 		return $this->db->insert("ciclos",$data);
 	}
 
-	public function update($id,$data){ /** actualiza los datos **/
+	public function update($id,$data){ 
+		# actualiza los datos
 		$this->db->where("id",$id);
 		return $this->db->update("ciclos",$data);
 	}
 
-	public function getedit($id){ /// cargar datos docente aula fechas del mantenimiento add prematricula
+	public function getedit($id){ 
+		# cargar datos docente aula fechas del mantenimiento add prematricula
 		$resultado = $this->db->select("*")
 			->from("ciclos")
 			->where("id",$id)

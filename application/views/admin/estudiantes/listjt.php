@@ -27,10 +27,10 @@
                     <div class="form-group row">
                         <div class="col-lg-4">
                             <input type="hidden" id="id" name="id" value="">
-                            <label for="dni" class="labelfor" > Número de Documento:</label>
+                            <label for="dni" class="labelfor">Número de Documento:</label>
                             <input type="text" class="medianos" id="dni" name="dni" autocomplete="off" required>
                             <input type="hidden" id="tipodocumento" name="tipodocumento" value="1">
-                            <button id="btn-consultar-dni" type="button" class="btn btn-primary  "><span class="fa fa-search"></span> DNI </button>
+                            <button id="btn-consultar-dni" type="button" class="btn btn-primary"><span class="fa fa-search"></span> DNI </button>
                         </div>
                         <div class="col-xs-8">
                             <label for="nombre" class="labelfor">Nombre Completo:</label>

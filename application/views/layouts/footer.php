@@ -54,6 +54,8 @@
 <script src="<?php echo base_url('scripts/estudiantes.js');?>"></script>
 <script src="<?php echo base_url('scripts/prematriculas.js');?>"></script>
 <script src="<?php echo base_url('scripts/pagos.js');?>"></script>
+<!-- Alertify JS-->
+<script src="<?php echo base_url('assets/template/alertify/alertify.min.js');?>"></script>
 <script>
 var base_url= "<?php echo base_url();?>";
 $(document).ready(function () {

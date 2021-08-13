@@ -1,38 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
 <head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
-    
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>CID</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>CID</title>
     <link rel="icon" href="<?php echo base_url()?>assets/img/cti.png" type="image/png">
-    
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
-
     <!-- timepicker 3.3.7 -->
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/timepicker/bootstrap-timepicker.min.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/timepicker/bootstrap-timepicker.css">
-
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/jquery-ui/jquery-ui.css">
-
     <!-- DataTables -->
     <!-- <link rel="stylesheet" href="<?php echo base_url();?>assets/template/datatables.net-bs/css/dataTables.bootstrap.min.css"> -->
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/datatables.net-bs/css/jquery.dataTables.min.css">
-     <!-- DataTables exports -->
+    <!-- DataTables exports -->
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/datatablesexport/css/buttons.dataTables.min.css">
-     <!-- DataTables icons  -->
-   <link rel="stylesheet" href="<?php echo base_url();?>assets/template/ionicons/css/ionicons.min.css">
-   <link rel="stylesheet" href="<?php echo base_url();?>assets/template/sheguito/formularios.css">
+    <!-- DataTables icons  -->
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/template/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/template/sheguito/formularios.css">
     <!-- IMPLEMENTACION JTABLE -->
-
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/jtable/themes/lightcolor/blue/jtable.min.css">
-
-
     <!-- Font Awesome  detalles de los botones dibujos-->
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/font-awesome/css/font-awesome.min.css"> 
     <!-- Theme style -->
@@ -40,6 +29,12 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
     parte izquierada menus del sistema -->
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/dist/css/skins/_all-skins.min.css">
+    <!-- Bootstrap Alertify CSS -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/template/alertify/css/themes/bootstrap.min.css');?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/template/alertify/css/alertify.min.css');?>">
+    <script>
+        var base_url = "<?php echo base_url();?>";
+    </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <!-- Site wrapper -->

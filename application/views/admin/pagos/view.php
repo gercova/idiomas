@@ -19,7 +19,7 @@
                     <tr> 
                     <th>ID</th>
                     <th>Documento</th>
-                     <th>Monto</th>
+                    <th>Monto</th>
                     <th>Codigo Boucher</th>
                     <th>Fecha de Pago</th>
                     <th></th>

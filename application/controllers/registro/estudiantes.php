@@ -101,36 +101,51 @@ class estudiantes extends CI_Controller {
 	}
 
 	public function store(){
-		$idusuario = $this->session->userdata("id");
-		$id = $this->input->post("id");
-		$dni = $this->input->post("dni");
-		$nombre = $this->input->post("nombre");
-		$celular = $this->input->post("celular");
-		$adicional = $this->input->post("adicional");
-		$email = $this->input->post("email");
-		$this->form_validation->set_rules("id", "Numero de Documento", "required|is_unique[estudiantes.id]");
+		$idusuario 	= $this->session->userdata("id");
+		#$id 		= $this->input->post("id");
+		#$dni 		= $this->input->post("dni");
+		#$nombre 	= $this->input->post("nombre");
+		#$celular 	= $this->input->post("celular");
+		#$adicional 	= $this->input->post("adicional");
+		#$email 		= $this->input->post("email");
 
-		$data  = array(
-			'dni' => $dni,
-			'nombre' => $nombre,
-			'celular' => $celular,
-			'email' => $email,
+		date_default_timezone_set('America/Lima');
+		$data['dni'] 		= $this->input->post('dni');
+		$data['nombre'] 	= $this->input->post('nombre');
+		$data['celular'] 	= $this->input->post('celular');
+		$data['email'] 		= $this->input->post('email');
+		$data['adicional'] 	= $this->input->post('adicional');
+		$data['usu_reg'] 	= $this->session->userdata("id");
+		$data['fec_reg'] 	= date('Y-m-d');
+
+		/*$data  = array(
+			'dni' 		=> $dni,
+			'nombre' 	=> $nombre,
+			'celular' 	=> $celular,
+			'email' 	=> $email,
 			'adicional' => $adicional,
-			'usu_reg' => $idusuario,
-			'fec_reg' => date('Y-m-d'),
-			'estado' => "1",
+			'usu_reg' 	=> $idusuario,
+			'fec_reg' 	=> date('Y-m-d'),
+			'estado' 	=> "1",
 
-		);
-
+		);*/
+		/*if(empty($id)){
+			$this->estudiantes_model->save($data);
+			echo json_encode(['success' => true]);
+		}*/
 		if ($id<=0) {
 			$this->estudiantes_model->save($data);
 			echo json_encode(['sucess' => true]);
-		//	redirect(base_url()."administrador/pacientes");
-		}
-		else{
-			$this->estudiantes_model->update($id,$data);
+		}else{
+			$this->estudiantes_model->update($id, $data);
 			echo json_encode(['sucess' => true]);
 		}
+	}
+
+	public function validar_dni(){
+		$value 	= $this->input->post('dni');
+		$result = $this->estudiantes_model->validar_dni($value);
+		echo json_encode($result);
 	}
 	
 	public function delete($id){

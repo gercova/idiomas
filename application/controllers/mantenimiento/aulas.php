@@ -17,13 +17,13 @@ class aulas extends CI_Controller {
 	}
 
 	public function lista(){	
-		$starIndex = $_GET['jtStartIndex'];
-		$pageSize = $_GET['jtPageSize'];
-		$buscar = (isset($_POST['search']) ? $_POST['search']: '' );
-		$libro = $this->aulas_model->grilla($starIndex, $pageSize, $buscar);
-		$jTableResult['Result'] = 'OK';
-		$jTableResult['Records'] = $libro[0];
-		$jTableResult['TotalRecordCount'] = $libro[1];
+		$starIndex 							= $_GET['jtStartIndex'];
+		$pageSize 							= $_GET['jtPageSize'];
+		$buscar 							= (isset($_POST['search']) ? $_POST['search']: '' );
+		$libro 								= $this->aulas_model->grilla($starIndex, $pageSize, $buscar);
+		$jTableResult['Result'] 			= 'OK';
+		$jTableResult['Records'] 			= $libro[0];
+		$jTableResult['TotalRecordCount'] 	= $libro[1];
 		header('Content-Type: application/json');
 		echo json_encode($jTableResult);
 	}
@@ -34,14 +34,8 @@ class aulas extends CI_Controller {
 	}
 
 	public function store(){
-		$id = $this->input->post("id");
-		$descripcion = $this->input->post("descripcion");
-
-		$data  = array(
-			'descripcion' => $descripcion,
-			'estado' => "1",
-
-		);
+		$id 					= $this->input->post("id");
+		$data['descripcion'] 	= $this->input->post("descripcion");
 
 		if ($id<=0) {
 			$this->aulas_model->save($data);
@@ -53,9 +47,7 @@ class aulas extends CI_Controller {
 	}
 
 	public function delete($id){
-		$data  = array(
-			'estado' => "0",
-		);
+		$data['estado'] = "0";
 		$this->aulas_model->update($id, $data);
 		echo json_encode(['sucess' => true]);
 	}

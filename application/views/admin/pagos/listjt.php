@@ -9,13 +9,6 @@
 		<!-- Default box -->
 		<div class="box box-solid">
 			<div class="box-body">
-				<div class="row">
-                    <div class="col-md-12">
-                        <a href="<?php echo base_url('movimientos/pagos/add');?>" class="btn btn-primary"><span class="fa fa-plus"></span> Realizar pago nuevo</a>
-                    </div>
-                </div>
-				<div class="row"></div>
-				<hr>
 				<div id="pagos"></div>
 			</div>
 			<!-- /.box-body -->

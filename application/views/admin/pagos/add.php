@@ -61,6 +61,7 @@
                                     <tr>
                                         <th style='text-align:center'>CODIGO VAUCHER</th>
                                         <th style='text-align:center'>MONTO</th>
+                                        <th style='text-align:center'>DETALLE</th>
                                         <th style='text-align:center'>FECHA PAGO</th>
                                         <th></th>
                                     </tr>
