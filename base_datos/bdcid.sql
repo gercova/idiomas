@@ -204,7 +204,6 @@ CREATE TABLE `docentes` (
 -- ----------------------------
 -- Records of docentes
 -- ----------------------------
-INSERT INTO `docentes` VALUES ('1', '45198491', 'RAMÍREZ SHUPINGAHUA SEGUNDO ROGER', '944929637', 'ctiunsm@gmail.com', 'segunda prueba', '1', '2021-05-27', null, '1');
 
 -- ----------------------------
 -- Table structure for estudiantes
@@ -231,7 +230,6 @@ INSERT INTO `estudiantes` VALUES ('1', null, 'ss', '944929637', 'a', null, '1', 
 INSERT INTO `estudiantes` VALUES ('2', '48190265', 'QUINDE HUAMÁN IVONNE', '123456789', 'ctiunsm@gmail.com', 'xxccx', '1', '2021-05-27', null, '1');
 INSERT INTO `estudiantes` VALUES ('3', '45198491', 'RAMÍREZ SHUPINGAHUA SEGUNDO ROGER', '944929637', 'ramish390@hotmail.com', 'este alumno no posee muchos conocimientos', '1', '2021-05-27', null, '1');
 INSERT INTO `estudiantes` VALUES ('4', '48198491', 'MOSQUERA NOA NAYLER', '456789149', 'ramish390@hotmail.com', 'prueba', '1', '2021-05-27', null, '1');
-INSERT INTO `estudiantes` VALUES ('5', '71719922', 'COTRINA VALLES GERMAN', '920307572', 'GERMAN@gmail.com', 'ES UN PUTITO', '1', '2021-06-13', null, '1');
 
 -- ----------------------------
 -- Table structure for horarios
@@ -519,4 +517,3 @@ CREATE TABLE `usuarios` (
 -- ----------------------------
 -- Records of usuarios
 -- ----------------------------
-INSERT INTO `usuarios` VALUES ('1', '45198491', 'RAMÍREZ SHUPINGAHUA SEGUNDO ROGER', 'TARAPOTO', '944929637', 'segundoroger@gmail.com', 'shego', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', '1');
