@@ -43,14 +43,6 @@ CREATE TABLE `aperturas` (
 --
 
 INSERT INTO `aperturas` (`id`, `cursos_id`, `sede_id`, `fec_ini`, `act_web`, `us_reg`, `fec_reg`, `estado`) VALUES
-(1, 1, 1, '2021-07-03', 0, 1, '2021-07-03 01:16:42', 1),
-(2, 1, 2, '2021-07-03', 0, 1, '2021-07-03 01:32:21', 1),
-(3, 1, 3, '2021-07-03', 0, 1, '2021-07-03 01:51:41', 1),
-(4, 1, 3, '2021-07-30', 0, 1, '2021-07-03 02:02:07', 1),
-(5, 1, 1, '2021-07-03', 0, 1, '2021-07-03 15:55:46', 1),
-(6, 1, 1, '2021-07-03', 0, 1, '2021-07-03 15:57:52', 1),
-(7, 1, 2, '2021-07-16', 0, 1, '2021-07-03 15:58:20', 1),
-(11, 1, 3, '2021-07-30', 1, 1, '2021-07-04 22:30:22', 1);
 
 -- --------------------------------------------------------
 
@@ -69,9 +61,6 @@ CREATE TABLE `aulas` (
 --
 
 INSERT INTO `aulas` (`id`, `descripcion`, `estado`) VALUES
-(1, 'SALA VIRTUAL MEET', 1),
-(2, 'SALA DE VIDEOLLAMADA EN ZOOM', 1),
-(3, 'AULA 01 - LABORATORIOS', 0);
 
 -- --------------------------------------------------------
 
@@ -90,7 +79,6 @@ CREATE TABLE `carreras` (
 --
 
 INSERT INTO `carreras` (`id`, `descripcion`, `estado`) VALUES
-(1, 'INGENIERIA DE SISTEMAS E INFORMÁTICA', 1);
 
 -- --------------------------------------------------------
 
@@ -206,11 +194,6 @@ CREATE TABLE `detalle_pago` (
 --
 
 INSERT INTO `detalle_pago` (`id`, `pago_id`, `codigo`, `monto`, `fecha`) VALUES
-(1, 1, '345612', 30, '2021-07-01'),
-(2, 1, '431900', 30, '2021-07-07'),
-(3, 2, '236790', 30, '2021-07-07'),
-(4, 3, '234323', 100, '2021-07-07'),
-(5, 4, '985367', 100, '2021-04-01');
 
 -- --------------------------------------------------------
 
@@ -250,7 +233,6 @@ CREATE TABLE `docentes` (
 --
 
 INSERT INTO `docentes` (`id`, `dni`, `nombre`, `celular`, `email`, `adicional`, `usu_reg`, `fec_reg`, `fec_web`, `estado`) VALUES
-(1, '45198491', 'RAMÍREZ SHUPINGAHUA SEGUNDO ROGER', '944929637', 'ctiunsm@gmail.com', 'segunda prueba', '1', '2021-05-27', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -276,12 +258,6 @@ CREATE TABLE `estudiantes` (
 --
 
 INSERT INTO `estudiantes` (`id`, `dni`, `nombre`, `celular`, `email`, `adicional`, `usu_reg`, `fec_reg`, `fec_web`, `estado`) VALUES
-(1, NULL, 'ss', '944929637', 'a', NULL, '1', '2021-05-25', NULL, 0),
-(2, '48190265', 'QUINDE HUAMÁN IVONNE', '123456789', 'ctiunsm@gmail.com', 'xxccx', '1', '2021-05-27', NULL, 1),
-(3, '45198491', 'RAMÍREZ SHUPINGAHUA SEGUNDO ROGER', '944929637', 'ramish390@hotmail.com', 'este alumno no posee muchos conocimientos', '1', '2021-05-27', NULL, 1),
-(4, '48198491', 'MOSQUERA NOA NAYLER', '456789149', 'ramish390@hotmail.com', 'prueba', '1', '2021-05-27', NULL, 1),
-(5, '71719922', 'COTRINA VALLES GERMAN', '920307572', 'GERMAN@gmail.com', 'ES UN PUTITO', '1', '2021-06-13', NULL, 1),
-(6, '71719923', 'COTRINA VALLES CARLOS', '999637140', 'carloscontrina98@gmail.com', 'Ninguno', '1', '2021-06-23', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -325,9 +301,6 @@ CREATE TABLE `matriculas` (
 --
 
 INSERT INTO `matriculas` (`id`, `estudiante_id`, `apertura_id`, `tipo_id`, `carrera_id`, `costo`, `deuda`, `matriculado`, `nota`, `certificado`, `usu_reg`, `fec_reg`, `estado`) VALUES
-(1, 1, 11, 1, 1, '260', '260', 0, 0, 0, 1, '2021-07-05', 1),
-(2, 3, 2, 3, NULL, '260', '260', 0, 0, 0, 1, '2021-07-05', 1),
-(3, 5, 11, 3, NULL, '0', '0', 0, 0, 0, 1, '2021-07-05', 1);
 
 -- --------------------------------------------------------
 
@@ -383,9 +356,6 @@ CREATE TABLE `modulos` (
 --
 
 INSERT INTO `modulos` (`id`, `curso_id`, `descripcion`, `abreviatura`, `horas`, `usu_reg`, `fec_reg`, `estado`) VALUES
-(1, 1, 'CILO I', 'A1-I', 30, 1, '2021-06-03', 1),
-(2, 1, 'CILO II', 'A1-II', 30, 1, '2021-06-03', 1),
-(3, 1, 'CICLO III', 'A1-III', 30, 1, '2021-06-03', 1);
 
 -- --------------------------------------------------------
 
@@ -450,10 +420,6 @@ CREATE TABLE `pagos` (
 --
 
 INSERT INTO `pagos` (`id`, `apertura_id`, `matricula_id`, `estudiante_id`, `concepto_id`, `descripcion`, `monto`, `codigo`, `fec_pago`, `usu_reg`, `fec_reg`, `estado`) VALUES
-(1, 2, 2, 3, 1, NULL, '260', NULL, NULL, 1, '2021-07-06', 1),
-(2, 2, 2, 3, 1, 0, '260', NULL, NULL, 1, '2021-07-06', 1),
-(3, 2, 2, 3, 1, 0, '260', NULL, NULL, 1, '2021-07-06', 1),
-(4, 2, 2, 3, 1, 0, '160', NULL, NULL, 1, '2021-07-06', 1);
 
 -- --------------------------------------------------------
 
@@ -476,21 +442,6 @@ CREATE TABLE `permisos` (
 --
 
 INSERT INTO `permisos` (`id`, `menu_id`, `rol_id`, `read`, `insert`, `update`, `delete`) VALUES
-(1, 1, 1, 1, 1, 1, 1),
-(2, 2, 1, 1, 1, 1, 1),
-(3, 3, 1, 1, 1, 1, 1),
-(4, 4, 1, 1, 1, 1, 1),
-(5, 5, 1, 1, 1, 1, 1),
-(6, 6, 1, 1, 1, 1, 1),
-(7, 7, 1, 1, 1, 1, 1),
-(8, 8, 1, 1, 1, 1, 1),
-(9, 9, 1, 1, 1, 1, 1),
-(10, 10, 1, 1, 1, 1, 1),
-(11, 11, 1, 1, 1, 1, 1),
-(12, 12, 1, 1, 1, 1, 1),
-(13, 13, 1, 1, 1, 1, 1),
-(14, 14, 1, 1, 1, 1, 1),
-(15, 15, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -509,7 +460,6 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `nombre`, `descripcion`) VALUES
-(1, 'superadmin', 'hace de todo');
 
 -- --------------------------------------------------------
 
@@ -528,9 +478,6 @@ CREATE TABLE `sedes` (
 --
 
 INSERT INTO `sedes` (`id`, `descripcion`, `estado`) VALUES
-(1, 'OFICINA TARAPOTO', 1),
-(2, 'OFICINA MOYOBAMBA', 1),
-(3, 'OFICINA RIOJA', 1);
 
 -- --------------------------------------------------------
 
@@ -554,8 +501,6 @@ CREATE TABLE `submodulos` (
 --
 
 INSERT INTO `submodulos` (`id`, `modulo_id`, `descripcion`, `costo`, `horas`, `usu_reg`, `fec_reg`, `estado`) VALUES
-(4, 2, 'CICLO 2', '130', '30', 1, '2021-07-02', 1),
-(5, 2, 'CICLO 3', '130', '30', 1, '2021-07-02', 1);
 
 -- --------------------------------------------------------
 
@@ -574,12 +519,6 @@ CREATE TABLE `tipos` (
 --
 
 INSERT INTO `tipos` (`id`, `descripcion`, `estado`) VALUES
-(1, 'PREGRADO', 1),
-(2, 'MAESTRÍA', 1),
-(3, 'DOCTORADO', 1),
-(4, 'PÚBLICO EN GENERAL', 1),
-(5, 'ADMINISTRATIVO', 1),
-(6, 'OTROS', 1);
 
 -- --------------------------------------------------------
 
@@ -625,8 +564,6 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `dni`, `nombre`, `ciudad`, `celular`, `email`, `username`, `password`, `rol_id`, `estado`) VALUES
-(1, '45198491', 'RAMÍREZ SHUPINGAHUA SEGUNDO ROGER', 'TARAPOTO', '944929637', 'segundoroger@gmail.com', 'shego', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 1);
-
 -- --------------------------------------------------------
 
 --
